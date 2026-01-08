@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
+import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import FactoryABI from '../contracts/abis/PredictionMarketFactory.json';
 
 export default function CreateMarketPage() {
+  const { t } = useTranslation();
   const { chain, address: userAddress } = useAccount();
   const [marketType, setMarketType] = useState<'binary' | 'categorical'>('binary');
   const [question, setQuestion] = useState('');

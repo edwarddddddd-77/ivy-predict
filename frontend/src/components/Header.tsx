@@ -12,7 +12,6 @@ export default function Header() {
 
   const languages = [
     { code: 'en', label: 'EN' },
-    { code: 'zh-CN', label: '简' },
     { code: 'zh-TW', label: '繁' },
   ];
 

@@ -13,14 +13,14 @@ export default function MarketDetailPage() {
   const [action, setAction] = useState<'buy' | 'sell'>('buy');
 
   // Read market info
-  const { data: marketInfo, refetch: refetchInfo } = useReadContract({
+  const { data: marketInfo } = useReadContract({
     address: address as `0x${string}`,
     abi: MarketABI.abi,
     functionName: 'getMarketInfo',
   });
 
   // Read user shares
-  const { data: userShares, refetch: refetchShares } = useReadContract({
+  const { data: userShares } = useReadContract({
     address: address as `0x${string}`,
     abi: MarketABI.abi,
     functionName: 'getUserShares',

@@ -21,7 +21,7 @@ export default function HomePage() {
     abi: FactoryABI.abi,
     functionName: 'getMarkets',
     args: [0n, marketCount || 10n],
-  });
+  }) as { data: string[] | undefined };
 
   return (
     <div>
@@ -99,7 +99,7 @@ export default function HomePage() {
         </div>
       ) : markets && markets.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {(markets as string[]).map((marketAddress) => (
+          {markets.map((marketAddress) => (
             <MarketCard key={marketAddress} address={marketAddress} />
           ))}
         </div>

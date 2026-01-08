@@ -1,20 +1,28 @@
 import { Link } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useTranslation } from 'react-i18next';
+import Logo from './Logo';
 
 export default function Header() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
+  const languages = [
+    { code: 'en', label: 'EN' },
+    { code: 'zh-CN', label: '简' },
+    { code: 'zh-TW', label: '繁' },
+  ];
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">🔮</span>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">IVY Predict</h1>
-              <p className="text-xs text-gray-500">Decentralized Prediction Markets</p>
-            </div>
+          <Link to="/" className="flex items-center">
+            <Logo className="h-10" />
           </Link>
 
           {/* Navigation */}
@@ -23,24 +31,42 @@ export default function Header() {
               to="/"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
             >
-              Markets
+              {t('nav.markets')}
             </Link>
             <Link
               to="/create"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
             >
-              Create Market
+              {t('nav.create')}
             </Link>
             <Link
               to="/portfolio"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
             >
-              Portfolio
+              {t('nav.portfolio')}
             </Link>
           </nav>
 
-          {/* Connect Wallet */}
-          <div>
+          {/* Language Switcher & Connect Wallet */}
+          <div className="flex items-center space-x-4">
+            {/* Language Switcher */}
+            <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => changeLanguage(lang.code)}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                    i18n.language === lang.code
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Connect Wallet */}
             <ConnectButton />
           </div>
         </div>

@@ -6,6 +6,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { config } from './wagmi.config';
+import './i18n/config';
 import '@rainbow-me/rainbowkit/styles.css';
 import './index.css';
 

@@ -1,0 +1,36 @@
+{
+  "name": "ivy-predict",
+  "version": "1.0.0",
+  "description": "IVY Predict - Decentralized Prediction Market on BNB Chain",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:coverage": "hardhat coverage",
+    "deploy:local": "hardhat run scripts/deploy/deploy.ts --network localhost",
+    "deploy:testnet": "hardhat run scripts/deploy/deploy.ts --network bscTestnet",
+    "deploy:mainnet": "hardhat run scripts/deploy/deploy.ts --network bscMainnet",
+    "verify": "hardhat verify --network bscTestnet",
+    "node": "hardhat node"
+  },
+  "keywords": ["prediction-market", "defi", "bnb-chain", "hardhat", "solidity"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "chai": "^4.3.10",
+    "hardhat": "^2.19.4",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "dotenv": "^16.3.1"
+  }
+}

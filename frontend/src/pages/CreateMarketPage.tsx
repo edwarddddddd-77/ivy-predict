@@ -70,8 +70,8 @@ export default function CreateMarketPage() {
     return (
       <div className="max-w-2xl mx-auto text-center py-12">
         <div className="text-6xl mb-4">🔗</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Connect Your Wallet</h2>
-        <p className="text-gray-600">Please connect your wallet to create a market</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('create.connect_title')}</h2>
+        <p className="text-gray-600">{t('create.connect_message')}</p>
       </div>
     );
   }
@@ -80,13 +80,13 @@ export default function CreateMarketPage() {
     return (
       <div className="max-w-2xl mx-auto text-center py-12">
         <div className="text-6xl mb-4">🎉</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Market Created!</h2>
-        <p className="text-gray-600 mb-6">Your prediction market has been successfully created.</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('create.success_title')}</h2>
+        <p className="text-gray-600 mb-6">{t('create.success_message')}</p>
         <a
           href="/"
           className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
         >
-          View Markets
+          {t('create.view_markets')}
         </a>
       </div>
     );
@@ -94,12 +94,12 @@ export default function CreateMarketPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Create Prediction Market</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t('create.title')}</h1>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
         {/* Market Type */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-3">Market Type</label>
+          <label className="block text-sm font-medium text-gray-700 mb-3">{t('create.market_type')}</label>
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => setMarketType('binary')}
@@ -109,8 +109,8 @@ export default function CreateMarketPage() {
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
-              <div className="text-lg font-semibold mb-1">Binary</div>
-              <div className="text-sm text-gray-600">YES / NO outcomes</div>
+              <div className="text-lg font-semibold mb-1">{t('create.binary')}</div>
+              <div className="text-sm text-gray-600">{t('create.binary_desc')}</div>
             </button>
             <button
               onClick={() => setMarketType('categorical')}
@@ -120,8 +120,8 @@ export default function CreateMarketPage() {
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
-              <div className="text-lg font-semibold mb-1">Categorical</div>
-              <div className="text-sm text-gray-600">Multiple outcomes</div>
+              <div className="text-lg font-semibold mb-1">{t('create.categorical')}</div>
+              <div className="text-sm text-gray-600">{t('create.categorical_desc')}</div>
             </button>
           </div>
         </div>
@@ -129,13 +129,13 @@ export default function CreateMarketPage() {
         {/* Question */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Market Question
+            {t('create.question')}
           </label>
           <input
             type="text"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            placeholder="e.g., Will BTC reach $100,000 by March 2026?"
+            placeholder={t('create.question_placeholder')}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
@@ -157,7 +157,7 @@ export default function CreateMarketPage() {
                       newOutcomes[index] = e.target.value;
                       setOutcomes(newOutcomes);
                     }}
-                    placeholder={`Outcome ${index + 1}`}
+                    placeholder={`${t('create.outcome_placeholder')} ${index + 1}`}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   {outcomes.length > 2 && (
@@ -165,7 +165,7 @@ export default function CreateMarketPage() {
                       onClick={() => handleRemoveOutcome(index)}
                       className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg"
                     >
-                      Remove
+                      {t('create.remove')}
                     </button>
                   )}
                 </div>
@@ -176,7 +176,7 @@ export default function CreateMarketPage() {
                 onClick={handleAddOutcome}
                 className="mt-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
               >
-                + Add Outcome
+                {t('create.add_outcome')}
               </button>
             )}
           </div>
@@ -185,7 +185,7 @@ export default function CreateMarketPage() {
         {/* Duration */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Duration (days)
+            {t('create.duration')}
           </label>
           <input
             type="number"
@@ -196,14 +196,14 @@ export default function CreateMarketPage() {
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <p className="mt-1 text-sm text-gray-500">
-            Market will close in {duration} days. Resolution happens 7 days after closing.
+            {t('create.duration_help', { days: duration })}
           </p>
         </div>
 
         {/* Initial Liquidity */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Initial Liquidity (BNB)
+            {t('create.liquidity')}
           </label>
           <input
             type="number"
@@ -214,24 +214,24 @@ export default function CreateMarketPage() {
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <p className="mt-1 text-sm text-gray-500">
-            Higher liquidity = more stable prices. Recommended: 1-10 BNB
+            {t('create.liquidity_help')}
           </p>
         </div>
 
         {/* Cost Summary */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-medium text-gray-900 mb-2">Cost Summary</h3>
+          <h3 className="text-sm font-medium text-gray-900 mb-2">{t('create.cost_summary')}</h3>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">Creation Fee</span>
+              <span className="text-gray-600">{t('create.creation_fee')}</span>
               <span className="font-medium">0.01 BNB</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Initial Liquidity</span>
+              <span className="text-gray-600">{t('create.liquidity')}</span>
               <span className="font-medium">{initialLiquidity} BNB</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-gray-200">
-              <span className="font-medium text-gray-900">Total</span>
+              <span className="font-medium text-gray-900">{t('create.total')}</span>
               <span className="font-bold text-gray-900">
                 {(0.01 + parseFloat(initialLiquidity)).toFixed(2)} BNB
               </span>
@@ -245,7 +245,7 @@ export default function CreateMarketPage() {
           disabled={!question || isPending || isConfirming}
           className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
-          {isPending || isConfirming ? 'Creating Market...' : 'Create Market'}
+          {isPending || isConfirming ? t('create.creating') : t('create.create_button')}
         </button>
       </div>
     </div>

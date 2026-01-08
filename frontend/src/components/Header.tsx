@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTranslation } from 'react-i18next';
-import Logo from './Logo';
 
 export default function Header() {
   const { t, i18n } = useTranslation();
@@ -21,7 +20,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <Logo className="h-10" />
+            <img src="/logo.png" alt="IVY Predict" className="h-10" />
           </Link>
 
           {/* Navigation */}

@@ -15,11 +15,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-prism-deep/90 backdrop-blur-md border-b border-energy-cyan/20 sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
+    <header className="backdrop-blur-xl bg-[#0A2342]/40 border-b border-white/10 sticky top-0 z-50">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-2 rounded-lg">
+          <Link to="/" className="flex items-center">
             <img
               src="/logo.png"
               alt="IVY Predict"
@@ -31,19 +31,19 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
             >
               {t('nav.markets')}
             </Link>
             <Link
               to="/create"
-              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
             >
               {t('nav.create')}
             </Link>
             <Link
               to="/portfolio"
-              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
             >
               {t('nav.portfolio')}
             </Link>
@@ -52,15 +52,15 @@ export default function Header() {
           {/* Language Switcher & Connect Wallet */}
           <div className="flex items-center space-x-4">
             {/* Language Switcher */}
-            <div className="flex items-center space-x-1 bg-prism-deep/50 border border-energy-cyan/30 rounded-lg p-1">
+            <div className="flex items-center space-x-1 border border-white/10 rounded-lg p-1">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => changeLanguage(lang.code)}
                   className={`px-3 py-1 rounded text-sm font-medium transition-all duration-300 ${
                     i18n.language === lang.code
-                      ? 'bg-brand-gradient text-white shadow-glow-cyan'
-                      : 'text-white/70 hover:text-energy-cyan'
+                      ? 'bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white'
+                      : 'text-[#8A9BA8] hover:text-[#00C9A7]'
                   }`}
                 >
                   {lang.label}

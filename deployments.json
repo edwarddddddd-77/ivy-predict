@@ -1,0 +1,15 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "timestamp": "2026-01-09T02:19:16.114Z",
+  "deployer": "0x9f3c75dBD5941446b53C19d0Fd1039C7842A1a69",
+  "contracts": {
+    "PriceMarketFactory": "0x8820b123aC0174d65C7b29CFEeED7f671EA672A0",
+    "TestMarket_BTC_1H": "0x183AcDD93B599405c520CF28cF96c6Ad6f54b820"
+  },
+  "priceFeeds": {
+    "BTC/USD": "0x5741306c21795FdCBb9b265Ea0255F499DFe515C",
+    "ETH/USD": "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7",
+    "BNB/USD": "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526"
+  }
+}

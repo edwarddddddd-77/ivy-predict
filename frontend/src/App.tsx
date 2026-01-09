@@ -3,6 +3,7 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import MarketDetailPage from './pages/MarketDetailPage';
 import CreateMarketPage from './pages/CreateMarketPage';
+import QuickMarketPage from './pages/QuickMarketPage';
 import PortfolioPage from './pages/PortfolioPage';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/market/:address" element={<MarketDetailPage />} />
           <Route path="/create" element={<CreateMarketPage />} />
+          <Route path="/quick" element={<QuickMarketPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </main>

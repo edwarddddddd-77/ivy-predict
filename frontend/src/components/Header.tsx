@@ -36,6 +36,12 @@ export default function Header() {
               {t('nav.markets')}
             </Link>
             <Link
+              to="/quick"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300 flex items-center gap-2"
+            >
+              <span>⚡</span> Quick Trade
+            </Link>
+            <Link
               to="/create"
               className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
             >

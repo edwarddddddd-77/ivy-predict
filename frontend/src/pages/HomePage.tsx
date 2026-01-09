@@ -2,25 +2,25 @@ import { useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
-import FactoryABI from '../contracts/abis/PredictionMarketFactory.json';
-import MarketCard from '../components/MarketCard';
+import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
+import PriceMarketCard from '../components/PriceMarketCard';
 
 export default function HomePage() {
   const { t } = useTranslation();
   const { chain } = useAccount();
   const [filter, setFilter] = useState<'all' | 'active' | 'resolved'>('all');
 
-  // Read total market count
+  // Read total market count from PriceMarketFactory
   const { data: marketCount } = useReadContract({
-    address: chain?.id ? getContractAddress(chain.id, 'FACTORY') as `0x${string}` : undefined,
-    abi: FactoryABI.abi,
+    address: chain?.id ? getContractAddress(chain.id, 'PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
+    abi: PriceMarketFactoryABI.abi,
     functionName: 'getMarketCount',
   });
 
-  // Read markets
+  // Read markets from PriceMarketFactory
   const { data: markets } = useReadContract({
-    address: chain?.id ? getContractAddress(chain.id, 'FACTORY') as `0x${string}` : undefined,
-    abi: FactoryABI.abi,
+    address: chain?.id ? getContractAddress(chain.id, 'PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
+    abi: PriceMarketFactoryABI.abi,
     functionName: 'getMarkets',
     args: [0n, marketCount || 10n],
   }) as { data: string[] | undefined };
@@ -35,26 +35,29 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="font-display text-7xl font-black mb-6 leading-tight">
-            <span className="text-white">Predict the </span>
-            <span className="glow-text-cyan">Future</span>
-            <span className="text-white">, Earn </span>
-            <span className="glow-text-cyan">Rewards</span>
+            <span className="text-white">⚡ Predict </span>
+            <span className="glow-text-cyan">Crypto Prices</span>
+            <span className="text-white"> in </span>
+            <span className="glow-text-cyan">Minutes</span>
           </h1>
           <p className="text-xl text-[#8A9BA8] mb-10 max-w-2xl leading-relaxed">
-            {t('home.hero_subtitle')}
+            Ultra-short-term price prediction markets. Trade UP/DOWN on BTC, ETH, BNB in 1-24 hours. Instant settlement via Chainlink oracles.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex gap-4 mb-16">
             <a
-              href="/create"
-              className="px-8 py-4 bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              href="/quick"
+              className="px-8 py-4 bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              {t('home.create_market')}
+              ⚡ Quick Trade
             </a>
-            <button className="px-8 py-4 border-2 border-[#00C9A7]/50 text-[#00C9A7] font-semibold rounded-lg hover:bg-[#00C9A7]/10 transition-all duration-300">
-              {t('home.learn_more')}
-            </button>
+            <a
+              href="/portfolio"
+              className="px-8 py-4 border-2 border-[#00C9A7]/50 text-[#00C9A7] font-semibold rounded-lg hover:bg-[#00C9A7]/10 transition-all duration-300"
+            >
+              💼 My Portfolio
+            </a>
           </div>
 
           {/* Stats - Glass Cards */}
@@ -129,7 +132,7 @@ export default function HomePage() {
         ) : markets && markets.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {markets.map((marketAddress) => (
-              <MarketCard key={marketAddress} address={marketAddress} />
+              <PriceMarketCard key={marketAddress} address={marketAddress} />
             ))}
           </div>
         ) : (
@@ -142,10 +145,10 @@ export default function HomePage() {
               {t('home.no_markets_message')}
             </p>
             <a
-              href="/create"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              href="/quick"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              {t('home.create_market')}
+              ⚡ Create First Market
             </a>
           </div>
         )}

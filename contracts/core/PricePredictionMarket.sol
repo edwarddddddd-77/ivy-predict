@@ -396,7 +396,7 @@ contract PricePredictionMarket is Ownable, ReentrancyGuard, Pausable {
         q[0] = quantities[0];
         q[1] = quantities[1];
 
-        return MarketMath.calculatePrice(q, directionIndex, liquidityParameter);
+        return MarketMath.calculatePrice(liquidityParameter, q, directionIndex);
     }
 
     /**

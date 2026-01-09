@@ -214,7 +214,7 @@ contract PriceMarketFactory is Ownable {
         // Count active markets first
         uint256 activeCount = 0;
         for (uint256 i = 0; i < allMarkets.length; i++) {
-            PricePredictionMarket market = PricePredictionMarket(allMarkets[i]);
+            PricePredictionMarket market = PricePredictionMarket(payable(allMarkets[i]));
             if (market.state() == PricePredictionMarket.MarketState.Active) {
                 activeCount++;
             }
@@ -224,7 +224,7 @@ contract PriceMarketFactory is Ownable {
         address[] memory activeMarkets = new address[](activeCount);
         uint256 index = 0;
         for (uint256 i = 0; i < allMarkets.length; i++) {
-            PricePredictionMarket market = PricePredictionMarket(allMarkets[i]);
+            PricePredictionMarket market = PricePredictionMarket(payable(allMarkets[i]));
             if (market.state() == PricePredictionMarket.MarketState.Active) {
                 activeMarkets[index] = allMarkets[i];
                 index++;

@@ -50,7 +50,7 @@ library ChainlinkFeeds {
         }
         // SOL/USD
         else if (symbolHash == keccak256(abi.encodePacked("SOL/USD"))) {
-            return 0x0E8a53DD9c13589df6382F13dA6B9Ec8F919B323;
+            return 0x0E8A53Dd9C13589df6382F13da6b9EC8f919B323;
         }
         // XRP/USD
         else if (symbolHash == keccak256(abi.encodePacked("XRP/USD"))) {
@@ -199,11 +199,34 @@ library ChainlinkFeeds {
      * @notice Check if symbol is supported on a chain
      */
     function isSupported(uint256 chainId, string memory symbol) internal pure returns (bool) {
-        try ChainlinkFeeds.getFeed(chainId, symbol) returns (address) {
-            return true;
-        } catch {
-            return false;
+        // Try to get feed address, if it reverts, symbol is not supported
+        // Note: Cannot use try-catch with internal functions
+        bytes32 symbolHash = keccak256(abi.encodePacked(symbol));
+
+        if (chainId == 56) {
+            // Check BSC Mainnet symbols
+            if (symbolHash == keccak256(abi.encodePacked("BTC/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("ETH/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("BNB/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("USDT/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("USDC/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("ADA/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("DOT/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("LINK/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("MATIC/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("SOL/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("XRP/USD"))) return true;
+        } else if (chainId == 97) {
+            // Check BSC Testnet symbols
+            if (symbolHash == keccak256(abi.encodePacked("BTC/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("ETH/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("BNB/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("USDT/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("LINK/USD"))) return true;
+            if (symbolHash == keccak256(abi.encodePacked("DAI/USD"))) return true;
         }
+
+        return false;
     }
 
     /**

@@ -19,11 +19,11 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-2 rounded-lg">
             <img
               src="/logo.png"
               alt="IVY Predict"
-              className="h-12 w-auto object-contain"
+              className="h-10 w-auto object-contain"
             />
           </Link>
 
@@ -31,19 +31,19 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
+              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
             >
               {t('nav.markets')}
             </Link>
             <Link
               to="/create"
-              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
+              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
             >
               {t('nav.create')}
             </Link>
             <Link
               to="/portfolio"
-              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
+              className="text-white/90 hover:text-energy-bright font-medium transition-all duration-300"
             >
               {t('nav.portfolio')}
             </Link>
@@ -60,7 +60,7 @@ export default function Header() {
                   className={`px-3 py-1 rounded text-sm font-medium transition-all duration-300 ${
                     i18n.language === lang.code
                       ? 'bg-brand-gradient text-white shadow-glow-cyan'
-                      : 'text-data-grey hover:text-energy-cyan'
+                      : 'text-white/70 hover:text-energy-cyan'
                   }`}
                 >
                   {lang.label}

@@ -34,10 +34,10 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-fintech-teal/10 rounded-full blur-3xl"></div>
 
         <div className="relative z-10 max-w-4xl">
-          <h1 className="font-display text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-energy-bright to-energy-cyan bg-clip-text text-transparent">
+          <h1 className="font-display text-6xl font-extrabold mb-6 text-white">
             {t('home.hero_title')}
           </h1>
-          <p className="text-xl text-data-grey-light mb-8 max-w-2xl">
+          <p className="text-xl text-white/90 mb-8 max-w-2xl">
             {t('home.hero_subtitle')}
           </p>
 
@@ -60,15 +60,15 @@ export default function HomePage() {
               <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">
                 {marketCount?.toString() || '0'}
               </div>
-              <div className="text-sm text-data-grey">{t('home.stats_markets')}</div>
+              <div className="text-sm text-white/70">{t('home.stats_markets')}</div>
             </div>
             <div className="bg-prism-deep/50 backdrop-blur-sm border border-energy-cyan/30 rounded-xl p-6 hover:border-energy-bright/50 transition-all duration-300">
               <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">$0</div>
-              <div className="text-sm text-data-grey">{t('home.stats_volume')}</div>
+              <div className="text-sm text-white/70">{t('home.stats_volume')}</div>
             </div>
             <div className="bg-prism-deep/50 backdrop-blur-sm border border-energy-cyan/30 rounded-xl p-6 hover:border-energy-bright/50 transition-all duration-300">
               <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">0</div>
-              <div className="text-sm text-data-grey">{t('home.stats_traders')}</div>
+              <div className="text-sm text-white/70">{t('home.stats_traders')}</div>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function HomePage() {
           <h3 className="font-display text-2xl font-bold text-white mb-3">
             {t('home.connect_wallet')}
           </h3>
-          <p className="text-data-grey-light text-lg">
+          <p className="text-white/70 text-lg">
             {t('home.connect_message')}
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function HomePage() {
           <h3 className="font-display text-2xl font-bold text-white mb-3">
             {t('home.no_markets')}
           </h3>
-          <p className="text-data-grey-light text-lg mb-6">
+          <p className="text-white/70 text-lg mb-6">
             {t('home.no_markets_message')}
           </p>
           <a

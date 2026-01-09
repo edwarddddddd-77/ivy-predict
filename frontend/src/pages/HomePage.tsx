@@ -26,61 +26,84 @@ export default function HomePage() {
   }) as { data: string[] | undefined };
 
   return (
-    <div>
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 text-white">
-        <h2 className="text-4xl font-bold mb-4">
-          {t('home.hero_title')}
-        </h2>
-        <p className="text-xl mb-6 opacity-90">
-          {t('home.hero_subtitle')}
-        </p>
-        <div className="grid grid-cols-3 gap-4 max-w-2xl">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-            <div className="text-3xl font-bold">{marketCount?.toString() || '0'}</div>
-            <div className="text-sm opacity-80">{t('home.stats_markets')}</div>
+      <div className="relative overflow-hidden geometric-pattern border border-energy-cyan/20 rounded-3xl p-12 mb-12">
+        {/* Prism glow effect */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-energy-cyan/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-fintech-teal/10 rounded-full blur-3xl"></div>
+
+        <div className="relative z-10 max-w-4xl">
+          <h1 className="font-display text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-energy-bright to-energy-cyan bg-clip-text text-transparent">
+            {t('home.hero_title')}
+          </h1>
+          <p className="text-xl text-data-grey-light mb-8 max-w-2xl">
+            {t('home.hero_subtitle')}
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex gap-4 mb-12">
+            <a
+              href="/create"
+              className="px-8 py-4 bg-brand-gradient text-white font-semibold rounded-lg shadow-glow-cyan hover:shadow-glow-cyan-lg transition-all duration-300 transform hover:scale-105"
+            >
+              {t('home.create_market')}
+            </a>
+            <button className="px-8 py-4 border-2 border-energy-cyan/50 text-energy-cyan font-semibold rounded-lg hover:bg-energy-cyan/10 transition-all duration-300">
+              {t('home.learn_more')}
+            </button>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-            <div className="text-3xl font-bold">$0</div>
-            <div className="text-sm opacity-80">{t('home.stats_volume')}</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-sm opacity-80">{t('home.stats_traders')}</div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-6 max-w-3xl">
+            <div className="bg-prism-deep/50 backdrop-blur-sm border border-energy-cyan/30 rounded-xl p-6 hover:border-energy-bright/50 transition-all duration-300">
+              <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">
+                {marketCount?.toString() || '0'}
+              </div>
+              <div className="text-sm text-data-grey">{t('home.stats_markets')}</div>
+            </div>
+            <div className="bg-prism-deep/50 backdrop-blur-sm border border-energy-cyan/30 rounded-xl p-6 hover:border-energy-bright/50 transition-all duration-300">
+              <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">$0</div>
+              <div className="text-sm text-data-grey">{t('home.stats_volume')}</div>
+            </div>
+            <div className="bg-prism-deep/50 backdrop-blur-sm border border-energy-cyan/30 rounded-xl p-6 hover:border-energy-bright/50 transition-all duration-300">
+              <div className="font-mono text-4xl font-bold text-energy-bright glow-text mb-2">0</div>
+              <div className="text-sm text-data-grey">{t('home.stats_traders')}</div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold text-gray-900">{t('home.title')}</h3>
-        <div className="flex space-x-2">
+      <div className="flex items-center justify-between mb-8">
+        <h3 className="font-display text-3xl font-bold text-white">{t('home.title')}</h3>
+        <div className="flex gap-3">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-300 ${
               filter === 'all'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-brand-gradient text-white shadow-glow-cyan'
+                : 'bg-prism-deep/50 border border-energy-cyan/30 text-data-grey-light hover:text-energy-cyan hover:border-energy-cyan/50'
             }`}
           >
             {t('home.filter_all')}
           </button>
           <button
             onClick={() => setFilter('active')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-300 ${
               filter === 'active'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-brand-gradient text-white shadow-glow-cyan'
+                : 'bg-prism-deep/50 border border-energy-cyan/30 text-data-grey-light hover:text-energy-cyan hover:border-energy-cyan/50'
             }`}
           >
             {t('home.filter_active')}
           </button>
           <button
             onClick={() => setFilter('resolved')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-300 ${
               filter === 'resolved'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-brand-gradient text-white shadow-glow-cyan'
+                : 'bg-prism-deep/50 border border-energy-cyan/30 text-data-grey-light hover:text-energy-cyan hover:border-energy-cyan/50'
             }`}
           >
             {t('home.filter_resolved')}
@@ -90,12 +113,12 @@ export default function HomePage() {
 
       {/* Markets Grid */}
       {!chain ? (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">🔗</div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <div className="text-center py-20 bg-prism-deep/30 border border-energy-cyan/20 rounded-2xl">
+          <div className="text-7xl mb-6">🔗</div>
+          <h3 className="font-display text-2xl font-bold text-white mb-3">
             {t('home.connect_wallet')}
           </h3>
-          <p className="text-gray-600">
+          <p className="text-data-grey-light text-lg">
             {t('home.connect_message')}
           </p>
         </div>
@@ -106,17 +129,17 @@ export default function HomePage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">📊</div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <div className="text-center py-20 bg-prism-deep/30 border border-energy-cyan/20 rounded-2xl">
+          <div className="text-7xl mb-6">📊</div>
+          <h3 className="font-display text-2xl font-bold text-white mb-3">
             {t('home.no_markets')}
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-data-grey-light text-lg mb-6">
             {t('home.no_markets_message')}
           </p>
           <a
             href="/create"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-block px-8 py-4 bg-brand-gradient text-white font-semibold rounded-lg shadow-glow-cyan hover:shadow-glow-cyan-lg transition-all duration-300 transform hover:scale-105"
           >
             {t('home.create_market')}
           </a>

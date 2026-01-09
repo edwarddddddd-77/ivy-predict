@@ -68,23 +68,23 @@ export default function CreateMarketPage() {
 
   if (!userAddress) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="text-6xl mb-4">🔗</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('create.connect_title')}</h2>
-        <p className="text-gray-600">{t('create.connect_message')}</p>
+      <div className="max-w-2xl mx-auto text-center py-20 bg-prism-deep/30 border border-energy-cyan/20 rounded-2xl">
+        <div className="text-7xl mb-6">🔗</div>
+        <h2 className="font-display text-2xl font-bold text-white mb-4">{t('create.connect_title')}</h2>
+        <p className="text-data-grey-light text-lg">{t('create.connect_message')}</p>
       </div>
     );
   }
 
   if (isSuccess) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="text-6xl mb-4">🎉</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('create.success_title')}</h2>
-        <p className="text-gray-600 mb-6">{t('create.success_message')}</p>
+      <div className="max-w-2xl mx-auto text-center py-20 bg-prism-deep/30 border border-energy-cyan/20 rounded-2xl">
+        <div className="text-7xl mb-6">🎉</div>
+        <h2 className="font-display text-2xl font-bold text-white mb-4">{t('create.success_title')}</h2>
+        <p className="text-data-grey-light text-lg mb-8">{t('create.success_message')}</p>
         <a
           href="/"
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
+          className="inline-block px-8 py-4 bg-brand-gradient text-white font-semibold rounded-lg shadow-glow-cyan hover:shadow-glow-cyan-lg transition-all duration-300 transform hover:scale-105"
         >
           {t('create.view_markets')}
         </a>
@@ -94,41 +94,41 @@ export default function CreateMarketPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t('create.title')}</h1>
+      <h1 className="font-display text-4xl font-bold text-white mb-8">{t('create.title')}</h1>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+      <div className="bg-prism-deep/50 border border-energy-cyan/30 rounded-2xl p-8 backdrop-blur-sm">
         {/* Market Type */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-3">{t('create.market_type')}</label>
+          <label className="block text-sm font-medium text-data-grey-light mb-3">{t('create.market_type')}</label>
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => setMarketType('binary')}
-              className={`p-4 rounded-lg border-2 transition-all ${
+              className={`p-4 rounded-lg border-2 transition-all duration-300 ${
                 marketType === 'binary'
-                  ? 'border-blue-600 bg-blue-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-energy-cyan bg-energy-cyan/10 shadow-glow-cyan'
+                  : 'border-data-grey/30 hover:border-energy-cyan/50 bg-deep-space/50'
               }`}
             >
-              <div className="text-lg font-semibold mb-1">{t('create.binary')}</div>
-              <div className="text-sm text-gray-600">{t('create.binary_desc')}</div>
+              <div className="text-lg font-semibold mb-1 text-white">{t('create.binary')}</div>
+              <div className="text-sm text-data-grey">{t('create.binary_desc')}</div>
             </button>
             <button
               onClick={() => setMarketType('categorical')}
-              className={`p-4 rounded-lg border-2 transition-all ${
+              className={`p-4 rounded-lg border-2 transition-all duration-300 ${
                 marketType === 'categorical'
-                  ? 'border-blue-600 bg-blue-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-energy-cyan bg-energy-cyan/10 shadow-glow-cyan'
+                  : 'border-data-grey/30 hover:border-energy-cyan/50 bg-deep-space/50'
               }`}
             >
-              <div className="text-lg font-semibold mb-1">{t('create.categorical')}</div>
-              <div className="text-sm text-gray-600">{t('create.categorical_desc')}</div>
+              <div className="text-lg font-semibold mb-1 text-white">{t('create.categorical')}</div>
+              <div className="text-sm text-data-grey">{t('create.categorical_desc')}</div>
             </button>
           </div>
         </div>
 
         {/* Question */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-data-grey-light mb-2">
             {t('create.question')}
           </label>
           <input
@@ -136,14 +136,14 @@ export default function CreateMarketPage() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder={t('create.question_placeholder')}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 bg-deep-space/50 border border-energy-cyan/30 rounded-lg text-white placeholder-data-grey focus:ring-2 focus:ring-energy-cyan focus:border-transparent transition-all"
           />
         </div>
 
         {/* Outcomes (for categorical) */}
         {marketType === 'categorical' && (
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-data-grey-light mb-2">
               Outcomes (2-10)
             </label>
             <div className="space-y-2">
@@ -158,12 +158,12 @@ export default function CreateMarketPage() {
                       setOutcomes(newOutcomes);
                     }}
                     placeholder={`${t('create.outcome_placeholder')} ${index + 1}`}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-4 py-2 bg-deep-space/50 border border-energy-cyan/30 rounded-lg text-white placeholder-data-grey focus:ring-2 focus:ring-energy-cyan focus:border-transparent transition-all"
                   />
                   {outcomes.length > 2 && (
                     <button
                       onClick={() => handleRemoveOutcome(index)}
-                      className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg"
+                      className="px-3 py-2 text-red-400 hover:bg-red-500/10 border border-red-400/30 rounded-lg transition-all"
                     >
                       {t('create.remove')}
                     </button>
@@ -174,7 +174,7 @@ export default function CreateMarketPage() {
             {outcomes.length < 10 && (
               <button
                 onClick={handleAddOutcome}
-                className="mt-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                className="mt-2 text-sm text-energy-cyan hover:text-energy-bright font-medium transition-colors"
               >
                 {t('create.add_outcome')}
               </button>
@@ -184,7 +184,7 @@ export default function CreateMarketPage() {
 
         {/* Duration */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-data-grey-light mb-2">
             {t('create.duration')}
           </label>
           <input
@@ -193,16 +193,16 @@ export default function CreateMarketPage() {
             onChange={(e) => setDuration(e.target.value)}
             min="1"
             max="365"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 bg-deep-space/50 border border-energy-cyan/30 rounded-lg text-white placeholder-data-grey focus:ring-2 focus:ring-energy-cyan focus:border-transparent transition-all"
           />
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-data-grey">
             {t('create.duration_help', { days: duration })}
           </p>
         </div>
 
         {/* Initial Liquidity */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-data-grey-light mb-2">
             {t('create.liquidity')}
           </label>
           <input
@@ -211,28 +211,28 @@ export default function CreateMarketPage() {
             onChange={(e) => setInitialLiquidity(e.target.value)}
             min="0.1"
             step="0.1"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 bg-deep-space/50 border border-energy-cyan/30 rounded-lg text-white placeholder-data-grey focus:ring-2 focus:ring-energy-cyan focus:border-transparent transition-all"
           />
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-data-grey">
             {t('create.liquidity_help')}
           </p>
         </div>
 
         {/* Cost Summary */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-medium text-gray-900 mb-2">{t('create.cost_summary')}</h3>
+        <div className="bg-deep-space/70 border border-energy-cyan/40 rounded-lg p-4 mb-6">
+          <h3 className="text-sm font-medium text-white mb-2">{t('create.cost_summary')}</h3>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">{t('create.creation_fee')}</span>
-              <span className="font-medium">0.01 BNB</span>
+              <span className="text-data-grey">{t('create.creation_fee')}</span>
+              <span className="font-medium text-white">0.01 BNB</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">{t('create.liquidity')}</span>
-              <span className="font-medium">{initialLiquidity} BNB</span>
+              <span className="text-data-grey">{t('create.liquidity')}</span>
+              <span className="font-medium text-white">{initialLiquidity} BNB</span>
             </div>
-            <div className="flex justify-between pt-2 border-t border-gray-200">
-              <span className="font-medium text-gray-900">{t('create.total')}</span>
-              <span className="font-bold text-gray-900">
+            <div className="flex justify-between pt-2 border-t border-energy-cyan/30">
+              <span className="font-medium text-white">{t('create.total')}</span>
+              <span className="font-mono font-bold text-energy-bright glow-text">
                 {(0.01 + parseFloat(initialLiquidity)).toFixed(2)} BNB
               </span>
             </div>
@@ -243,7 +243,7 @@ export default function CreateMarketPage() {
         <button
           onClick={handleCreate}
           disabled={!question || isPending || isConfirming}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="w-full py-4 px-4 bg-brand-gradient text-white rounded-lg font-semibold shadow-glow-cyan hover:shadow-glow-cyan-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 disabled:transform-none"
         >
           {isPending || isConfirming ? t('create.creating') : t('create.create_button')}
         </button>

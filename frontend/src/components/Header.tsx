@@ -15,31 +15,35 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-prism-deep/90 backdrop-blur-md border-b border-energy-cyan/20 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="IVY Predict" className="h-10" />
+            <img
+              src="/logo.png"
+              alt="IVY Predict"
+              className="h-12 w-auto object-contain"
+            />
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
             >
               {t('nav.markets')}
             </Link>
             <Link
               to="/create"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
             >
               {t('nav.create')}
             </Link>
             <Link
               to="/portfolio"
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              className="text-data-grey-light hover:text-energy-bright font-medium transition-all duration-300 hover:glow-text"
             >
               {t('nav.portfolio')}
             </Link>
@@ -48,15 +52,15 @@ export default function Header() {
           {/* Language Switcher & Connect Wallet */}
           <div className="flex items-center space-x-4">
             {/* Language Switcher */}
-            <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
+            <div className="flex items-center space-x-1 bg-prism-deep/50 border border-energy-cyan/30 rounded-lg p-1">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => changeLanguage(lang.code)}
-                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all duration-300 ${
                     i18n.language === lang.code
-                      ? 'bg-white text-blue-600 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? 'bg-brand-gradient text-white shadow-glow-cyan'
+                      : 'text-data-grey hover:text-energy-cyan'
                   }`}
                 >
                   {lang.label}

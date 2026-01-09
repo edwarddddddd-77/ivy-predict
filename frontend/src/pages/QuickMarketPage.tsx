@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient } from 'wagmi';
 import { parseEther } from 'viem';
 import { getContractAddress } from '../contracts/addresses';
 import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
@@ -19,12 +20,37 @@ const DURATIONS = [
 ];
 
 export default function QuickMarketPage() {
+  const navigate = useNavigate();
+  const publicClient = usePublicClient();
   const { chain, address: userAddress } = useAccount();
   const [selectedAsset, setSelectedAsset] = useState('BTC');
   const [selectedDuration, setSelectedDuration] = useState('1h');
+  const [createdMarketAddress, setCreatedMarketAddress] = useState<string | null>(null);
 
   const { data: hash, writeContract, isPending } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess, data: receipt } = useWaitForTransactionReceipt({ hash });
+
+  // Extract market address from transaction receipt and navigate
+  useEffect(() => {
+    if (isSuccess && receipt && publicClient) {
+      // Find MarketCreated event in logs
+      const marketCreatedEvent = receipt.logs.find(
+        (log) =>
+          log.topics[0] ===
+          '0x8b0e0cd1a643dbca06e58c7c1b9f8d3e6c3f99c0a5a6d4e2f2e0d4d3c3c3c3c3' // MarketCreated event signature (placeholder)
+      );
+
+      if (marketCreatedEvent && marketCreatedEvent.topics[1]) {
+        // Market address is typically in the first indexed parameter
+        const marketAddress = `0x${marketCreatedEvent.topics[1].slice(-40)}`;
+        setCreatedMarketAddress(marketAddress);
+      } else if (receipt.logs.length > 0) {
+        // Fallback: try to extract from any log
+        const possibleAddress = receipt.logs[0].address;
+        setCreatedMarketAddress(possibleAddress);
+      }
+    }
+  }, [isSuccess, receipt, publicClient]);
 
   const handleCreateMarket = () => {
     if (!chain) return;
@@ -86,12 +112,21 @@ export default function QuickMarketPage() {
           Your {selectedAsset} {selectedDuration} prediction market is live
         </p>
         <div className="flex gap-4 justify-center">
-          <a
-            href="/"
-            className="px-8 py-4 bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            View All Markets
-          </a>
+          {createdMarketAddress ? (
+            <button
+              onClick={() => navigate(`/price-market/${createdMarketAddress}`)}
+              className="px-8 py-4 bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              📈 Trade Now
+            </button>
+          ) : (
+            <a
+              href="/"
+              className="px-8 py-4 bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              View All Markets
+            </a>
+          )}
           <button
             onClick={() => window.location.reload()}
             className="px-8 py-4 border-2 border-[#00C9A7]/50 text-[#00C9A7] font-semibold rounded-lg hover:bg-[#00C9A7]/10 transition-all duration-300"

@@ -26,9 +26,9 @@ export default function MarketCard({ address }: MarketCardProps) {
 
   if (!marketInfo) {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse">
-        <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-        <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+      <div className="glass-card rounded-xl p-6 animate-pulse">
+        <div className="h-4 bg-white/10 rounded w-3/4 mb-4"></div>
+        <div className="h-3 bg-white/10 rounded w-1/2"></div>
       </div>
     );
   }
@@ -41,53 +41,53 @@ export default function MarketCard({ address }: MarketCardProps) {
   return (
     <Link
       to={`/market/${address}`}
-      className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow p-6 block"
+      className="glass-card rounded-xl p-6 block transition-all duration-300 hover:scale-[1.02] hover:border-[#00C9A7]/50"
     >
       {/* Status Badge */}
       <div className="flex items-center justify-between mb-4">
         <span
           className={`px-3 py-1 rounded-full text-xs font-medium ${
             state === 'Active'
-              ? 'bg-green-100 text-green-800'
+              ? 'bg-[#00C9A7]/20 text-[#00C9A7] border border-[#00C9A7]/30'
               : state === 'Resolved'
-              ? 'bg-blue-100 text-blue-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-[#005F6B]/20 text-[#00C9A7] border border-[#005F6B]/30'
+              : 'bg-white/10 text-[#8A9BA8] border border-white/20'
           }`}
         >
           {state}
         </span>
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-[#8A9BA8]">
           Ends {format(new Date(Number(info.endTime) * 1000), 'MMM d')}
         </span>
       </div>
 
       {/* Question */}
-      <h3 className="text-lg font-semibold text-gray-900 mb-4 line-clamp-2">
+      <h3 className="text-lg font-semibold text-white mb-4 line-clamp-2">
         {info.question}
       </h3>
 
       {/* Probabilities */}
       <div className="space-y-2 mb-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="font-medium text-gray-700">YES</span>
-          <span className="font-bold text-green-600">{yesProb.toFixed(1)}%</span>
+          <span className="font-medium text-[#8A9BA8]">YES</span>
+          <span className="font-bold text-[#00C9A7]">{yesProb.toFixed(1)}%</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-white/10 rounded-full h-2">
           <div
-            className="bg-green-500 h-2 rounded-full transition-all"
+            className="bg-gradient-to-r from-[#00C9A7] to-[#005F6B] h-2 rounded-full transition-all"
             style={{ width: `${yesProb}%` }}
           ></div>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="font-medium text-gray-700">NO</span>
-          <span className="font-bold text-red-600">{noProb.toFixed(1)}%</span>
+          <span className="font-medium text-[#8A9BA8]">NO</span>
+          <span className="font-bold text-red-400">{noProb.toFixed(1)}%</span>
         </div>
       </div>
 
       {/* Volume */}
-      <div className="flex items-center justify-between text-sm text-gray-600 pt-4 border-t border-gray-100">
+      <div className="flex items-center justify-between text-sm text-[#8A9BA8] pt-4 border-t border-white/10">
         <span>Volume</span>
-        <span className="font-medium">{formatEther(info.totalVolume)} BNB</span>
+        <span className="font-medium text-white">{formatEther(info.totalVolume)} BNB</span>
       </div>
     </Link>
   );

@@ -21,7 +21,7 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center pl-2">
             <img
-              src="/logo.png"
+              src="/logo.svg"
               alt="IVY Predict"
               className="h-12 w-auto object-contain"
             />

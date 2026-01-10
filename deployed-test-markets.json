@@ -1,0 +1,28 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "factory": "0x8820b123aC0174d65C7b29CFEeED7f671EA672A0",
+  "createdAt": "2026-01-10T20:40:23.379Z",
+  "markets": [
+    {
+      "name": "BTC 1H",
+      "address": "0x4EE10FA6877227c78DA96E23F2a8c2BAAecAA3c7"
+    },
+    {
+      "name": "BTC 4H",
+      "address": "0x52A31F57D61995230f3613C9ea118d111Fb343B7"
+    },
+    {
+      "name": "BTC 24H",
+      "address": "0x74d728CafEB09c504B01BbB5801231c76973ea00"
+    },
+    {
+      "name": "ETH 1H",
+      "address": "0x4d9B48FD9f3f240802f347567500FDF2ba48F24F"
+    },
+    {
+      "name": "ETH 4H",
+      "address": "0x4A78E76711C86e464bbb7ABf4F95db8a4d28D0d4"
+    }
+  ]
+}

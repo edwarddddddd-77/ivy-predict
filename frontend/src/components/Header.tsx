@@ -20,11 +20,10 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center pl-2">
-            <img
-              src="/logo.svg"
-              alt="IVY Predict"
-              className="h-12 w-auto object-contain"
-            />
+            <h1 className="font-display text-2xl font-bold">
+              <span className="glow-text-cyan">IVY</span>
+              <span className="text-white">-Predict</span>
+            </h1>
           </Link>
 
           {/* Navigation */}

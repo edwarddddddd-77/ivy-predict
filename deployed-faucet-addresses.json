@@ -1,0 +1,8 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "mockUSDT": "0x846314aA0461E7ae9F1B69F52A565ad8A335E72b",
+  "faucet": "0x2fb19570EC97b8Be0CfE390765ab1DaD4a3BeD99",
+  "claimAmount": "30000",
+  "deployedAt": "2026-01-10T19:06:48.290Z"
+}

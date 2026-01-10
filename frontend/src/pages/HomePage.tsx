@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
 import PriceMarketCard from '../components/PriceMarketCard';
+import FaucetBanner from '../components/FaucetBanner';
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -78,6 +79,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Test USDT Faucet Banner (TESTNET ONLY) */}
+      <div className="max-w-7xl mx-auto px-6">
+        <FaucetBanner />
       </div>
 
       {/* Filters */}

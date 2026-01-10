@@ -7,6 +7,7 @@ import {
   useWaitForTransactionReceipt,
 } from 'wagmi';
 import { formatEther, parseEther } from 'viem';
+import { useTranslation } from 'react-i18next';
 import PriceMarketABI from '../contracts/abis/PricePredictionMarket.json';
 
 // Asset configurations matching QuickMarketPage
@@ -24,6 +25,7 @@ const DURATION_LABELS: Record<number, string> = {
 
 // Countdown timer component
 function CountdownTimer({ endTime }: { endTime: number }) {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState<string>('');
   const [percentage, setPercentage] = useState<number>(100);
 
@@ -33,7 +35,7 @@ function CountdownTimer({ endTime }: { endTime: number }) {
       const remaining = endTime - now;
 
       if (remaining <= 0) {
-        setTimeLeft('Ended');
+        setTimeLeft(t('common.ended'));
         setPercentage(0);
         return;
       }
@@ -65,7 +67,7 @@ function CountdownTimer({ endTime }: { endTime: number }) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm text-[#8A9BA8]">Time Remaining</span>
+        <span className="text-sm text-[#8A9BA8]">{t('priceMarket.time_remaining')}</span>
         <span
           className={`text-2xl font-bold ${
             isUrgent
@@ -95,6 +97,7 @@ function CountdownTimer({ endTime }: { endTime: number }) {
 }
 
 export default function PriceMarketDetailPage() {
+  const { t } = useTranslation();
   const { address } = useParams<{ address: string }>();
   const { address: userAddress } = useAccount();
   const [amount, setAmount] = useState('');
@@ -263,7 +266,7 @@ export default function PriceMarketDetailPage() {
         to="/quick"
         className="inline-flex items-center gap-2 text-[#8A9BA8] hover:text-[#00C9A7] mb-6 transition-colors"
       >
-        ← Back to Quick Trade
+        ← {t('priceMarket.back_to_quick')}
       </Link>
 
       {/* Market Header */}
@@ -277,11 +280,10 @@ export default function PriceMarketDetailPage() {
             </div>
             <div>
               <h1 className="font-display text-4xl font-bold text-white mb-2">
-                {String(assetSymbol)} Price Prediction
+                {String(assetSymbol)} {t('priceMarket.price_prediction')}
               </h1>
               <p className="text-xl text-[#8A9BA8]">
-                Will price go <span className="text-green-400">UP</span> or{' '}
-                <span className="text-red-400">DOWN</span> in {durationLabel}?
+                {t('priceMarket.question', { duration: durationLabel })}
               </p>
             </div>
           </div>
@@ -294,7 +296,7 @@ export default function PriceMarketDetailPage() {
                 : 'bg-yellow-500/20 text-yellow-400 border-2 border-yellow-500/50'
             }`}
           >
-            {isActive ? '🟢 Active' : Boolean(isSettled) ? '✅ Settled' : '⏳ Locked'}
+            {isActive ? `🟢 ${t('priceMarket.status_active')}` : Boolean(isSettled) ? `✅ ${t('priceMarket.status_settled')}` : `⏳ ${t('priceMarket.status_locked')}`}
           </div>
         </div>
 
@@ -304,21 +306,21 @@ export default function PriceMarketDetailPage() {
         {/* Price Info */}
         <div className="grid grid-cols-3 gap-6 mt-8 pt-6 border-t border-white/10">
           <div>
-            <div className="text-sm text-[#8A9BA8] mb-1">Start Price</div>
+            <div className="text-sm text-[#8A9BA8] mb-1">{t('priceMarket.start_price')}</div>
             <div className="text-3xl font-bold text-white">
               ${startPriceFormatted}
             </div>
           </div>
           <div>
             <div className="text-sm text-[#8A9BA8] mb-1">
-              {Boolean(isSettled) ? 'End Price' : 'Current Price'}
+              {Boolean(isSettled) ? t('priceMarket.end_price') : t('priceMarket.current_price')}
             </div>
             <div className="text-3xl font-bold text-white">
               ${endPriceFormatted}
             </div>
           </div>
           <div>
-            <div className="text-sm text-[#8A9BA8] mb-1">Total Volume</div>
+            <div className="text-sm text-[#8A9BA8] mb-1">{t('priceMarket.total_volume')}</div>
             <div className="text-3xl font-bold text-[#00C9A7]">
               {totalVolume ? formatEther(totalVolume as bigint) : '0'} BNB
             </div>
@@ -329,13 +331,13 @@ export default function PriceMarketDetailPage() {
         {Boolean(isSettled) && winner && (
           <div className="mt-6 p-6 bg-gradient-to-r from-[#00C9A7]/20 to-[#005F6B]/20 rounded-xl border border-[#00C9A7]/50">
             <div className="text-center">
-              <div className="text-sm text-[#8A9BA8] mb-2">Final Result</div>
+              <div className="text-sm text-[#8A9BA8] mb-2">{t('priceMarket.final_result')}</div>
               <div
                 className={`text-5xl font-bold ${
                   winner === 'UP' ? 'text-green-400' : 'text-red-400'
                 }`}
               >
-                {winner === 'UP' ? '📈 PRICE WENT UP!' : '📉 PRICE WENT DOWN!'}
+                {winner === 'UP' ? `📈 ${t('priceMarket.price_up')}` : `📉 ${t('priceMarket.price_down')}`}
               </div>
               <div className="text-lg text-white mt-2">
                 ${startPriceFormatted} → ${endPriceFormatted}
@@ -357,15 +359,15 @@ export default function PriceMarketDetailPage() {
                     <div className="text-4xl">📈</div>
                     <div>
                       <div className="text-2xl font-bold text-white">
-                        Buy UP
+                        {t('priceMarket.buy_up')}
                       </div>
                       <div className="text-sm text-[#8A9BA8]">
-                        Bet that price will increase
+                        {t('priceMarket.bet_increase')}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-[#8A9BA8]">Probability</div>
+                    <div className="text-sm text-[#8A9BA8]">{t('priceMarket.probability')}</div>
                     <div className="text-3xl font-bold text-green-400">
                       {probUP.toFixed(1)}%
                     </div>
@@ -376,7 +378,7 @@ export default function PriceMarketDetailPage() {
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    placeholder="0.0 BNB"
+                    placeholder={t('market.amount_placeholder')}
                     className="flex-1 px-4 py-3 bg-[#0A2342]/60 border border-white/10 rounded-lg text-white placeholder-[#8A9BA8] focus:outline-none focus:border-[#00C9A7]"
                     step="0.01"
                     min="0"
@@ -386,7 +388,7 @@ export default function PriceMarketDetailPage() {
                     disabled={isPending || isConfirming || !amount}
                     className="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
-                    {isPending || isConfirming ? 'Buying...' : 'Buy UP'}
+                    {isPending || isConfirming ? t('priceMarket.buying') : t('priceMarket.buy_up')}
                   </button>
                 </div>
               </div>
@@ -398,15 +400,15 @@ export default function PriceMarketDetailPage() {
                     <div className="text-4xl">📉</div>
                     <div>
                       <div className="text-2xl font-bold text-white">
-                        Buy DOWN
+                        {t('priceMarket.buy_down')}
                       </div>
                       <div className="text-sm text-[#8A9BA8]">
-                        Bet that price will decrease
+                        {t('priceMarket.bet_decrease')}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-[#8A9BA8]">Probability</div>
+                    <div className="text-sm text-[#8A9BA8]">{t('priceMarket.probability')}</div>
                     <div className="text-3xl font-bold text-red-400">
                       {probDOWN.toFixed(1)}%
                     </div>
@@ -417,7 +419,7 @@ export default function PriceMarketDetailPage() {
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    placeholder="0.0 BNB"
+                    placeholder={t('market.amount_placeholder')}
                     className="flex-1 px-4 py-3 bg-[#0A2342]/60 border border-white/10 rounded-lg text-white placeholder-[#8A9BA8] focus:outline-none focus:border-[#00C9A7]"
                     step="0.01"
                     min="0"
@@ -427,7 +429,7 @@ export default function PriceMarketDetailPage() {
                     disabled={isPending || isConfirming || !amount}
                     className="px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
-                    {isPending || isConfirming ? 'Buying...' : 'Buy DOWN'}
+                    {isPending || isConfirming ? t('priceMarket.buying') : t('priceMarket.buy_down')}
                   </button>
                 </div>
               </div>
@@ -438,16 +440,16 @@ export default function PriceMarketDetailPage() {
                 {winner === 'UP' ? '🎉' : '💰'}
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">
-                Market Settled
+                {t('priceMarket.market_settled')}
               </h3>
               <p className="text-[#8A9BA8] mb-6">
                 {(userSharesUP && typeof userSharesUP === 'bigint' && Number(userSharesUP) > 0 && winner === 'UP')
-                  ? 'Congratulations! You won! Click below to claim your winnings.'
+                  ? t('priceMarket.congratulations')
                   : (userSharesDOWN && typeof userSharesDOWN === 'bigint' &&
                     Number(userSharesDOWN) > 0 &&
                     winner === 'DOWN')
-                  ? 'Congratulations! You won! Click below to claim your winnings.'
-                  : 'This market has been settled.'}
+                  ? t('priceMarket.congratulations')
+                  : t('priceMarket.market_ended')}
               </p>
               {Boolean(
                 ((userSharesUP && typeof userSharesUP === 'bigint' && Number(userSharesUP) > 0 && winner === 'UP') ||
@@ -461,8 +463,8 @@ export default function PriceMarketDetailPage() {
                   className="px-12 py-4 bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white text-xl font-bold rounded-xl hover:opacity-90 disabled:opacity-50 transition-all"
                 >
                   {isPending || isConfirming
-                    ? 'Claiming...'
-                    : '💎 Claim Winnings'}
+                    ? t('priceMarket.claiming')
+                    : `💎 ${t('priceMarket.claim_winnings')}`}
                 </button>
               )}
             </div>
@@ -470,10 +472,10 @@ export default function PriceMarketDetailPage() {
             <div className="glass-card rounded-xl p-8 text-center">
               <div className="text-6xl mb-4">⏳</div>
               <h3 className="text-2xl font-bold text-white mb-4">
-                Market Locked
+                {t('priceMarket.market_locked')}
               </h3>
               <p className="text-[#8A9BA8]">
-                Trading has ended. Waiting for settlement...
+                {t('priceMarket.locked_message')}
               </p>
             </div>
           )}
@@ -485,10 +487,10 @@ export default function PriceMarketDetailPage() {
                 <div className="text-3xl">✅</div>
                 <div>
                   <div className="text-lg font-bold text-white">
-                    Transaction Successful!
+                    {t('priceMarket.transaction_success')}
                   </div>
                   <div className="text-sm text-[#8A9BA8]">
-                    Your shares have been purchased
+                    {t('priceMarket.shares_purchased')}
                   </div>
                 </div>
               </div>
@@ -501,12 +503,12 @@ export default function PriceMarketDetailPage() {
           {/* Market Distribution */}
           <div className="glass-card rounded-xl p-6">
             <h3 className="text-xl font-bold text-white mb-4">
-              Market Distribution
+              {t('priceMarket.market_distribution')}
             </h3>
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-[#8A9BA8]">📈 UP Shares</span>
+                  <span className="text-[#8A9BA8]">📈 {t('priceMarket.up_shares')}</span>
                   <span className="font-bold text-green-400">
                     {quantityUP ? formatEther(quantityUP as bigint) : '0'}
                   </span>
@@ -520,7 +522,7 @@ export default function PriceMarketDetailPage() {
               </div>
               <div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-[#8A9BA8]">📉 DOWN Shares</span>
+                  <span className="text-[#8A9BA8]">📉 {t('priceMarket.down_shares')}</span>
                   <span className="font-bold text-red-400">
                     {quantityDOWN ? formatEther(quantityDOWN as bigint) : '0'}
                   </span>
@@ -539,17 +541,17 @@ export default function PriceMarketDetailPage() {
           {userAddress && (
             <div className="glass-card rounded-xl p-6">
               <h3 className="text-xl font-bold text-white mb-4">
-                Your Position
+                {t('priceMarket.your_position')}
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between py-3 border-b border-white/10">
-                  <span className="text-[#8A9BA8]">📈 UP Shares</span>
+                  <span className="text-[#8A9BA8]">📈 {t('priceMarket.up_shares')}</span>
                   <span className="font-bold text-white">
                     {userSharesUP ? formatEther(userSharesUP as bigint) : '0'}
                   </span>
                 </div>
                 <div className="flex justify-between py-3">
-                  <span className="text-[#8A9BA8]">📉 DOWN Shares</span>
+                  <span className="text-[#8A9BA8]">📉 {t('priceMarket.down_shares')}</span>
                   <span className="font-bold text-white">
                     {userSharesDOWN
                       ? formatEther(userSharesDOWN as bigint)
@@ -562,25 +564,25 @@ export default function PriceMarketDetailPage() {
 
           {/* Market Info */}
           <div className="glass-card rounded-xl p-6">
-            <h3 className="text-xl font-bold text-white mb-4">Market Info</h3>
+            <h3 className="text-xl font-bold text-white mb-4">{t('priceMarket.market_info')}</h3>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between py-2">
-                <span className="text-[#8A9BA8]">Duration</span>
+                <span className="text-[#8A9BA8]">{t('priceMarket.duration')}</span>
                 <span className="font-medium text-white">{durationLabel}</span>
               </div>
               <div className="flex justify-between py-2">
-                <span className="text-[#8A9BA8]">Trading Fee</span>
+                <span className="text-[#8A9BA8]">{t('priceMarket.trading_fee')}</span>
                 <span className="font-medium text-white">2.0%</span>
               </div>
               <div className="flex justify-between py-2">
-                <span className="text-[#8A9BA8]">Contract</span>
+                <span className="text-[#8A9BA8]">{t('priceMarket.contract')}</span>
                 <a
                   href={`https://testnet.bscscan.com/address/${address}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-[#00C9A7] hover:underline"
                 >
-                  View on BscScan ↗
+                  {t('priceMarket.view_bscscan')} ↗
                 </a>
               </div>
             </div>

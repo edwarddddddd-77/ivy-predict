@@ -1,6 +1,7 @@
 {
   "nav": {
     "markets": "Markets",
+    "quick_trade": "Quick Trade",
     "create": "Create Market",
     "portfolio": "Portfolio",
     "connect": "Connect Wallet"
@@ -95,7 +96,10 @@
     "success": "Success",
     "active": "Active",
     "closed": "Closed",
-    "resolved": "Resolved"
+    "resolved": "Resolved",
+    "ended": "Ended",
+    "up": "UP",
+    "down": "DOWN"
   },
   "quick": {
     "hero_title": "Quick Price Prediction",
@@ -131,7 +135,9 @@
     "status_active": "Active",
     "status_settled": "Settled",
     "status_locked": "Locked",
+    "status_live": "Live",
     "time_remaining": "Time Remaining",
+    "time_left": "Time Left",
     "start_price": "Start Price",
     "end_price": "End Price",
     "current_price": "Current Price",
@@ -162,7 +168,10 @@
     "duration": "Duration",
     "trading_fee": "Trading Fee",
     "contract": "Contract",
-    "view_bscscan": "View on BscScan"
+    "view_bscscan": "View on BscScan",
+    "not_recorded": "Not recorded",
+    "prediction_suffix": "Prediction",
+    "volume": "Volume"
   },
   "faucet": {
     "title": "Test USDT Faucet",

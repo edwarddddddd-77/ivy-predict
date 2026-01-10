@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useReadContract } from 'wagmi';
 import { formatEther } from 'viem';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import PriceMarketABI from '../contracts/abis/PricePredictionMarket.json';
 
 interface PriceMarketCardProps {
@@ -22,6 +23,7 @@ const DURATION_LABELS: Record<number, string> = {
 };
 
 export default function PriceMarketCard({ address }: PriceMarketCardProps) {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState<string>('');
 
   // Read market data
@@ -84,7 +86,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
       const remaining = Number(endTime) - now;
 
       if (remaining <= 0) {
-        setTimeLeft('Ended');
+        setTimeLeft(t('common.ended'));
         return;
       }
 
@@ -105,7 +107,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
     const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
-  }, [endTime]);
+  }, [endTime, t]);
 
   if (!assetSymbol || !duration) {
     return (
@@ -134,7 +136,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
   // Format start price
   const startPriceFormatted = startPrice
     ? `$${(Number(startPrice) / 1e8).toFixed(2)}`
-    : 'Not recorded';
+    : t('priceMarket.not_recorded');
 
   return (
     <Link
@@ -151,7 +153,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">{String(assetSymbol)}</h3>
-            <p className="text-xs text-[#8A9BA8]">{durationLabel} Prediction</p>
+            <p className="text-xs text-[#8A9BA8]">{durationLabel} {t('priceMarket.prediction_suffix')}</p>
           </div>
         </div>
         <span
@@ -163,7 +165,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
               : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
           }`}
         >
-          {isActive ? '🟢 Live' : settled ? '✅ Settled' : '⏳ Locked'}
+          {isActive ? `🟢 ${t('priceMarket.status_live')}` : settled ? `✅ ${t('priceMarket.status_settled')}` : `⏳ ${t('priceMarket.status_locked')}`}
         </span>
       </div>
 
@@ -171,7 +173,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
       <div className="mb-4 pb-4 border-b border-white/10">
         <div className="flex items-center justify-between text-sm">
           <span className="text-[#8A9BA8]">
-            {isActive ? 'Time Left' : 'Start Price'}
+            {isActive ? t('priceMarket.time_left') : t('priceMarket.start_price')}
           </span>
           <span className="font-bold text-white">
             {isActive ? timeLeft : startPriceFormatted}
@@ -184,7 +186,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">📈</span>
-            <span className="font-medium text-white">UP</span>
+            <span className="font-medium text-white">{t('common.up')}</span>
           </div>
           <span className="font-bold text-green-400 text-lg">
             {probUP.toFixed(1)}%
@@ -200,7 +202,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">📉</span>
-            <span className="font-medium text-white">DOWN</span>
+            <span className="font-medium text-white">{t('common.down')}</span>
           </div>
           <span className="font-bold text-red-400 text-lg">
             {probDOWN.toFixed(1)}%
@@ -216,7 +218,7 @@ export default function PriceMarketCard({ address }: PriceMarketCardProps) {
 
       {/* Volume */}
       <div className="flex items-center justify-between text-sm text-[#8A9BA8] pt-4 border-t border-white/10">
-        <span>Volume</span>
+        <span>{t('priceMarket.volume')}</span>
         <span className="font-medium text-[#00C9A7]">
           {totalVolume ? formatEther(totalVolume as bigint) : '0'} BNB
         </span>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient } from 'wagmi';
 import { parseEther } from 'viem';
+import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
 
@@ -20,6 +21,7 @@ const DURATIONS = [
 ];
 
 export default function QuickMarketPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const publicClient = usePublicClient();
   const { chain, address: userAddress } = useAccount();
@@ -97,8 +99,8 @@ export default function QuickMarketPage() {
     return (
       <div className="max-w-4xl mx-auto text-center py-20 glass-card rounded-2xl">
         <div className="text-7xl mb-6">🔗</div>
-        <h2 className="font-display text-2xl font-bold text-white mb-4">Connect Wallet</h2>
-        <p className="text-[#8A9BA8] text-lg">Please connect your wallet to create a market</p>
+        <h2 className="font-display text-2xl font-bold text-white mb-4">{t('quick.connect_wallet')}</h2>
+        <p className="text-[#8A9BA8] text-lg">{t('quick.connect_message')}</p>
       </div>
     );
   }
@@ -107,9 +109,9 @@ export default function QuickMarketPage() {
     return (
       <div className="max-w-4xl mx-auto text-center py-20 glass-card rounded-2xl">
         <div className="text-7xl mb-6">🎉</div>
-        <h2 className="font-display text-2xl font-bold text-white mb-4">Market Created!</h2>
+        <h2 className="font-display text-2xl font-bold text-white mb-4">{t('quick.created_title')}</h2>
         <p className="text-[#8A9BA8] text-lg mb-8">
-          Your {selectedAsset} {selectedDuration} prediction market is live
+          {t('quick.created_message', { asset: selectedAsset, duration: selectedDuration })}
         </p>
         <div className="flex gap-4 justify-center">
           {createdMarketAddress ? (
@@ -117,21 +119,21 @@ export default function QuickMarketPage() {
               onClick={() => navigate(`/price-market/${createdMarketAddress}`)}
               className="px-8 py-4 bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              📈 Trade Now
+              {t('quick.trade_now')}
             </button>
           ) : (
             <a
               href="/"
               className="px-8 py-4 bg-gradient-to-r from-[#005F6B] to-[#0A2342] text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              View All Markets
+              {t('quick.view_all')}
             </a>
           )}
           <button
             onClick={() => window.location.reload()}
             className="px-8 py-4 border-2 border-[#00C9A7]/50 text-[#00C9A7] font-semibold rounded-lg hover:bg-[#00C9A7]/10 transition-all duration-300"
           >
-            Create Another
+            {t('quick.create_another')}
           </button>
         </div>
       </div>
@@ -143,10 +145,10 @@ export default function QuickMarketPage() {
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="font-display text-5xl font-bold text-white mb-4">
-          ⚡ Quick <span className="glow-text-cyan">Price</span> Prediction
+          {t('quick.hero_title')}
         </h1>
         <p className="text-xl text-[#8A9BA8] max-w-2xl mx-auto">
-          Create ultra-short-term price markets in seconds. Will BTC go up or down in the next hour?
+          {t('quick.hero_subtitle')}
         </p>
       </div>
 
@@ -155,7 +157,7 @@ export default function QuickMarketPage() {
         {/* Left: Asset Selection */}
         <div className="glass-card rounded-2xl p-8">
           <h3 className="font-display text-2xl font-bold text-white mb-6 flex items-center gap-3">
-            <span>📈</span> Select Asset
+            <span>📈</span> {t('quick.select_asset')}
           </h3>
           <div className="space-y-4">
             {ASSETS.map((asset) => (
@@ -192,7 +194,7 @@ export default function QuickMarketPage() {
         {/* Right: Duration Selection */}
         <div className="glass-card rounded-2xl p-8">
           <h3 className="font-display text-2xl font-bold text-white mb-6 flex items-center gap-3">
-            <span>⏱️</span> Select Duration
+            <span>⏱️</span> {t('quick.select_duration')}
           </h3>
           <div className="space-y-4">
             {DURATIONS.map((duration) => (
@@ -231,11 +233,11 @@ export default function QuickMarketPage() {
       <div className="glass-card rounded-2xl p-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="font-display text-2xl font-bold text-white mb-2">Market Summary</h3>
-            <p className="text-[#8A9BA8]">Review and confirm your market creation</p>
+            <h3 className="font-display text-2xl font-bold text-white mb-2">{t('quick.market_summary')}</h3>
+            <p className="text-[#8A9BA8]">{t('quick.review_confirm')}</p>
           </div>
           <div className="text-right">
-            <div className="text-sm text-[#8A9BA8] mb-1">Creation Fee</div>
+            <div className="text-sm text-[#8A9BA8] mb-1">{t('quick.creation_fee')}</div>
             <div className="text-3xl font-bold text-[#00C9A7]">0.01 BNB</div>
           </div>
         </div>
@@ -253,19 +255,19 @@ export default function QuickMarketPage() {
               </div>
               <div>
                 <div className="text-2xl font-bold text-white mb-1">
-                  Will {selectedAsset} price go UP or DOWN?
+                  {t('quick.preview_question', { asset: selectedAsset })}
                 </div>
                 <div className="text-lg text-[#8A9BA8]">
-                  Duration: {DURATIONS.find((d) => d.value === selectedDuration)?.label}
+                  {t('quick.duration')}: {DURATIONS.find((d) => d.value === selectedDuration)?.label}
                 </div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-[#8A9BA8] mb-1">Ends in</div>
+              <div className="text-sm text-[#8A9BA8] mb-1">{t('quick.ends_in')}</div>
               <div className="text-2xl font-bold text-white">
-                {selectedDuration === '1h' && '1 hour'}
-                {selectedDuration === '4h' && '4 hours'}
-                {selectedDuration === '24h' && '24 hours'}
+                {selectedDuration === '1h' && t('quick.duration_1h')}
+                {selectedDuration === '4h' && t('quick.duration_4h')}
+                {selectedDuration === '24h' && t('quick.duration_24h')}
               </div>
             </div>
           </div>
@@ -295,19 +297,19 @@ export default function QuickMarketPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              Creating Market...
+              {t('quick.creating')}
             </span>
           ) : (
             <span className="flex items-center justify-center gap-3">
               <span>🚀</span>
-              Create Market Now
+              {t('quick.create_now')}
             </span>
           )}
         </button>
 
         {/* Info */}
         <div className="mt-6 text-center text-sm text-[#8A9BA8]">
-          💡 After creation, anyone can trade UP/DOWN shares until market ends
+          💡 {t('quick.info_text')}
         </div>
       </div>
     </div>

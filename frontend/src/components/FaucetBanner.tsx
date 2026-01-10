@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import USDTFaucetABI from '../contracts/abis/USDTFaucet.json';
 
 export default function FaucetBanner() {
+  const { t } = useTranslation();
   const { address: userAddress, chain } = useAccount();
   const [claiming, setClaiming] = useState(false);
 
@@ -30,7 +32,7 @@ export default function FaucetBanner() {
 
   const handleClaim = async () => {
     if (!chain || chain.id !== 97) {
-      alert('Please switch to BSC Testnet');
+      alert(t('faucet.alert_testnet') || 'Please switch to BSC Testnet');
       return;
     }
 
@@ -73,16 +75,16 @@ export default function FaucetBanner() {
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
             <span className="text-4xl">🚰</span>
-            <h2 className="font-display text-2xl font-bold text-white">Test USDT Faucet</h2>
+            <h2 className="font-display text-2xl font-bold text-white">{t('faucet.title')}</h2>
             <span className="px-3 py-1 bg-white/20 rounded-full text-xs font-bold text-white">
-              TESTNET ONLY
+              {t('faucet.testnet_only')}
             </span>
           </div>
           <p className="text-white/90 text-lg mb-1">
-            Get <span className="font-bold">30,000 tUSDT</span> for free to test IVY Predict
+            {t('faucet.description')}
           </p>
           <p className="text-white/70 text-sm">
-            Available: {availableClaims.toLocaleString()} claims remaining
+            {t('faucet.available')}: {availableClaims.toLocaleString()} {t('faucet.claims_remaining')}
           </p>
         </div>
 
@@ -90,15 +92,15 @@ export default function FaucetBanner() {
         <div className="flex-shrink-0">
           {!userAddress ? (
             <div className="px-8 py-4 bg-white/20 text-white/60 rounded-lg font-semibold cursor-not-allowed">
-              Connect Wallet First
+              {t('faucet.connect_first')}
             </div>
           ) : hasClaimed ? (
             <div className="text-center">
               <div className="px-8 py-4 bg-white/20 text-white rounded-lg font-semibold flex items-center gap-2">
                 <span>✅</span>
-                <span>Already Claimed</span>
+                <span>{t('faucet.already_claimed')}</span>
               </div>
-              <p className="text-white/70 text-xs mt-2">You've received your 30,000 tUSDT</p>
+              <p className="text-white/70 text-xs mt-2">{t('faucet.received')}</p>
             </div>
           ) : (
             <button
@@ -112,12 +114,12 @@ export default function FaucetBanner() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Claiming...
+                  {t('faucet.claiming')}
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
                   <span>💰</span>
-                  <span>Claim 30,000 tUSDT</span>
+                  <span>{t('faucet.claim_button')}</span>
                 </span>
               )}
             </button>
@@ -129,7 +131,7 @@ export default function FaucetBanner() {
       {error && (
         <div className="relative z-10 mt-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
           <p className="text-white text-sm">
-            ❌ Error: {error.message.includes('AlreadyClaimed') ? 'You have already claimed tokens' : 'Transaction failed. Please try again.'}
+            ❌ {t('common.error')}: {error.message.includes('AlreadyClaimed') ? t('faucet.error_claimed') : t('faucet.error_failed')}
           </p>
         </div>
       )}
@@ -138,7 +140,7 @@ export default function FaucetBanner() {
       {isSuccess && (
         <div className="relative z-10 mt-4 p-3 bg-green-500/20 border border-green-500/50 rounded-lg">
           <p className="text-white text-sm">
-            ✅ Success! 30,000 tUSDT have been sent to your wallet.
+            ✅ {t('faucet.success')}
           </p>
         </div>
       )}

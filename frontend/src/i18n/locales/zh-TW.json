@@ -1,6 +1,7 @@
 {
   "nav": {
     "markets": "市場",
+    "quick_trade": "快速交易",
     "create": "創建市場",
     "portfolio": "投資組合",
     "connect": "連接錢包"
@@ -95,7 +96,10 @@
     "success": "成功",
     "active": "進行中",
     "closed": "已關閉",
-    "resolved": "已結算"
+    "resolved": "已結算",
+    "ended": "已結束",
+    "up": "UP",
+    "down": "DOWN"
   },
   "quick": {
     "hero_title": "快速價格預測",
@@ -131,7 +135,9 @@
     "status_active": "進行中",
     "status_settled": "已結算",
     "status_locked": "已鎖定",
+    "status_live": "進行中",
     "time_remaining": "剩餘時間",
+    "time_left": "剩餘時間",
     "start_price": "起始價格",
     "end_price": "結束價格",
     "current_price": "當前價格",
@@ -162,7 +168,10 @@
     "duration": "時長",
     "trading_fee": "交易費用",
     "contract": "合約",
-    "view_bscscan": "在 BscScan 上查看"
+    "view_bscscan": "在 BscScan 上查看",
+    "not_recorded": "未記錄",
+    "prediction_suffix": "預測",
+    "volume": "交易量"
   },
   "faucet": {
     "title": "測試 USDT 水龍頭",

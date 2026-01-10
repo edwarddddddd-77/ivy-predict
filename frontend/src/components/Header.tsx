@@ -16,47 +16,47 @@ export default function Header() {
 
   return (
     <header className="backdrop-blur-xl bg-[#0A2342]/40 border-b border-white/10 sticky top-0 z-50">
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-8 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center pl-2">
             <img
               src="/logo.png"
               alt="IVY Predict"
-              className="h-10 w-auto object-contain"
+              className="h-12 w-auto object-contain"
             />
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             <Link
               to="/"
-              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300"
             >
               {t('nav.markets')}
             </Link>
             <Link
               to="/quick"
-              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300 flex items-center gap-2"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300 flex items-center gap-2"
             >
               <span>⚡</span> Quick Trade
             </Link>
             <Link
               to="/create"
-              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300"
             >
               {t('nav.create')}
             </Link>
             <Link
               to="/portfolio"
-              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium transition-all duration-300"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300"
             >
               {t('nav.portfolio')}
             </Link>
           </nav>
 
           {/* Language Switcher & Connect Wallet */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-5 pr-2">
             {/* Language Switcher */}
             <div className="flex items-center space-x-1 border border-white/10 rounded-lg p-1">
               {languages.map((lang) => (

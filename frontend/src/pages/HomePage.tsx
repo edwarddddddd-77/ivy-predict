@@ -3,6 +3,7 @@ import { useAccount, useReadContract } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
+import USDTPriceMarketFactoryABI from '../contracts/abis/USDTPriceMarketFactory.json';
 import PriceMarketCard from '../components/PriceMarketCard';
 import FaucetBanner from '../components/FaucetBanner';
 
@@ -10,21 +11,41 @@ export default function HomePage() {
   const { t } = useTranslation();
   const { chain } = useAccount();
   const [filter, setFilter] = useState<'all' | 'active' | 'resolved'>('all');
+  const [paymentType, setPaymentType] = useState<'USDT' | 'BNB'>('USDT'); // Default to USDT
 
-  // Read total market count from PriceMarketFactory
-  const { data: marketCount } = useReadContract({
+  // Read USDT market count
+  const { data: usdtMarketCount } = useReadContract({
+    address: chain?.id ? getContractAddress(chain.id, 'USDT_PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
+    abi: USDTPriceMarketFactoryABI.abi,
+    functionName: 'getMarketCount',
+  });
+
+  // Read USDT markets
+  const { data: usdtMarkets } = useReadContract({
+    address: chain?.id ? getContractAddress(chain.id, 'USDT_PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
+    abi: USDTPriceMarketFactoryABI.abi,
+    functionName: 'getMarkets',
+    args: [0n, usdtMarketCount || 10n],
+  }) as { data: string[] | undefined };
+
+  // Read BNB market count
+  const { data: bnbMarketCount } = useReadContract({
     address: chain?.id ? getContractAddress(chain.id, 'PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
     abi: PriceMarketFactoryABI.abi,
     functionName: 'getMarketCount',
   });
 
-  // Read markets from PriceMarketFactory
-  const { data: markets } = useReadContract({
+  // Read BNB markets
+  const { data: bnbMarkets } = useReadContract({
     address: chain?.id ? getContractAddress(chain.id, 'PRICE_MARKET_FACTORY') as `0x${string}` : undefined,
     abi: PriceMarketFactoryABI.abi,
     functionName: 'getMarkets',
-    args: [0n, marketCount || 10n],
+    args: [0n, bnbMarketCount || 10n],
   }) as { data: string[] | undefined };
+
+  // Select markets based on payment type
+  const markets = paymentType === 'USDT' ? usdtMarkets : bnbMarkets;
+  const marketCount = paymentType === 'USDT' ? usdtMarketCount : bnbMarketCount;
 
   return (
     <div className="min-h-screen geometric-pattern">
@@ -86,9 +107,36 @@ export default function HomePage() {
         <FaucetBanner />
       </div>
 
-      {/* Filters */}
+      {/* Payment Type & Filters */}
       <div className="flex items-center justify-between mb-8 px-6 max-w-7xl mx-auto">
-        <h3 className="font-display text-3xl font-bold text-white">{t('home.title')}</h3>
+        <div className="flex items-center gap-4">
+          <h3 className="font-display text-3xl font-bold text-white">{t('home.title')}</h3>
+
+          {/* Payment Type Toggle */}
+          <div className="flex gap-2 bg-[#0A2342]/60 rounded-lg p-1">
+            <button
+              onClick={() => setPaymentType('USDT')}
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-300 ${
+                paymentType === 'USDT'
+                  ? 'bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white shadow-lg'
+                  : 'text-[#8A9BA8] hover:text-white'
+              }`}
+            >
+              💵 USDT
+            </button>
+            <button
+              onClick={() => setPaymentType('BNB')}
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-300 ${
+                paymentType === 'BNB'
+                  ? 'bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white shadow-lg'
+                  : 'text-[#8A9BA8] hover:text-white'
+              }`}
+            >
+              ⚡ BNB
+            </button>
+          </div>
+        </div>
+
         <div className="flex gap-3">
           <button
             onClick={() => setFilter('all')}

@@ -1,0 +1,29 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "factory": "0xBCCb4a4DEEF67B5776e26a28C23ce01F828295E6",
+  "marketType": "USDT",
+  "createdAt": "2026-01-10T21:41:43.766Z",
+  "markets": [
+    {
+      "name": "BTC 1H (USDT)",
+      "address": "0xf5221ccD95A239133d2bbB4836E57dc584F9205f"
+    },
+    {
+      "name": "BTC 4H (USDT)",
+      "address": "0xdf9822F5cDf873DCd50E1334DC7ae82684B9B208"
+    },
+    {
+      "name": "BTC 24H (USDT)",
+      "address": "0x65522d72185c4CADcf921BA6ab9848bdf6ECf5Db"
+    },
+    {
+      "name": "ETH 1H (USDT)",
+      "address": "0xf0c7bE55B7B8c2bBEB4D6124d845C52de6EDb3d9"
+    },
+    {
+      "name": "ETH 4H (USDT)",
+      "address": "0x73DE727441989a61D9B6a0519259239eD5c8976f"
+    }
+  ]
+}

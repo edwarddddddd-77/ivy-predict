@@ -5,6 +5,7 @@ import { parseEther } from 'viem';
 import { useTranslation } from 'react-i18next';
 import { getContractAddress } from '../contracts/addresses';
 import PriceMarketFactoryABI from '../contracts/abis/PriceMarketFactory.json';
+import USDTPriceMarketFactoryABI from '../contracts/abis/USDTPriceMarketFactory.json';
 
 // Asset options
 const ASSETS = [
@@ -27,6 +28,7 @@ export default function QuickMarketPage() {
   const { chain, address: userAddress } = useAccount();
   const [selectedAsset, setSelectedAsset] = useState('BTC');
   const [selectedDuration, setSelectedDuration] = useState('1h');
+  const [paymentType, setPaymentType] = useState<'USDT' | 'BNB'>('USDT'); // Default to USDT
   const [createdMarketAddress, setCreatedMarketAddress] = useState<string | null>(null);
 
   const { data: hash, writeContract, isPending } = useWriteContract();
@@ -61,8 +63,16 @@ export default function QuickMarketPage() {
     const duration = DURATIONS.find(d => d.value === selectedDuration);
     if (!asset || !duration) return;
 
-    const factoryAddress = getContractAddress(chain.id, 'PRICE_MARKET_FACTORY');
-    const creationFee = parseEther('0.01'); // 0.01 BNB
+    // Select factory and ABI based on payment type
+    const factoryAddress = paymentType === 'USDT'
+      ? getContractAddress(chain.id, 'USDT_PRICE_MARKET_FACTORY')
+      : getContractAddress(chain.id, 'PRICE_MARKET_FACTORY');
+
+    const factoryABI = paymentType === 'USDT'
+      ? USDTPriceMarketFactoryABI.abi
+      : PriceMarketFactoryABI.abi;
+
+    const creationFee = parseEther('0.01'); // 0.01 BNB (creation fee is always paid in BNB)
 
     // Use quick create functions
     let functionName = '';
@@ -80,7 +90,7 @@ export default function QuickMarketPage() {
     if (functionName === 'createMarket') {
       writeContract({
         address: factoryAddress as `0x${string}`,
-        abi: PriceMarketFactoryABI.abi,
+        abi: factoryABI,
         functionName: 'createMarket',
         args: [`${selectedAsset}/USD`, duration.duration],
         value: creationFee,
@@ -88,7 +98,7 @@ export default function QuickMarketPage() {
     } else {
       writeContract({
         address: factoryAddress as `0x${string}`,
-        abi: PriceMarketFactoryABI.abi,
+        abi: factoryABI,
         functionName,
         value: creationFee,
       });
@@ -239,6 +249,38 @@ export default function QuickMarketPage() {
           <div className="text-right">
             <div className="text-sm text-[#8A9BA8] mb-1">{t('quick.creation_fee')}</div>
             <div className="text-3xl font-bold text-[#00C9A7]">0.01 BNB</div>
+          </div>
+        </div>
+
+        {/* Payment Type Selection */}
+        <div className="mb-6 p-4 bg-[#0A2342]/40 rounded-xl border border-white/10">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-white font-medium mb-1">💰 {t('quick.payment_method')}</div>
+              <div className="text-sm text-[#8A9BA8]">{t('quick.payment_method_desc')}</div>
+            </div>
+            <div className="flex gap-2 bg-[#0A2342]/60 rounded-lg p-1">
+              <button
+                onClick={() => setPaymentType('USDT')}
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-300 ${
+                  paymentType === 'USDT'
+                    ? 'bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white shadow-lg'
+                    : 'text-[#8A9BA8] hover:text-white'
+                }`}
+              >
+                💵 USDT
+              </button>
+              <button
+                onClick={() => setPaymentType('BNB')}
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-300 ${
+                  paymentType === 'BNB'
+                    ? 'bg-gradient-to-r from-[#00C9A7] to-[#005F6B] text-white shadow-lg'
+                    : 'text-[#8A9BA8] hover:text-white'
+                }`}
+              >
+                ⚡ BNB
+              </button>
+            </div>
           </div>
         </div>
 

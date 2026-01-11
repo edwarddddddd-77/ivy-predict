@@ -106,6 +106,8 @@
     "hero_subtitle": "在幾秒鐘內創建超短期價格市場。BTC 會在接下來一小時內上漲還是下跌？",
     "select_asset": "選擇資產",
     "select_duration": "選擇時長",
+    "payment_method": "支付方式",
+    "payment_method_desc": "選擇使用 USDT 或 BNB 進行交易",
     "duration_1h": "1小時",
     "duration_4h": "4小時",
     "duration_24h": "24小時",

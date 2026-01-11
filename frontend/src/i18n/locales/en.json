@@ -106,6 +106,8 @@
     "hero_subtitle": "Create ultra-short-term price markets in seconds. Will BTC go up or down in the next hour?",
     "select_asset": "Select Asset",
     "select_duration": "Select Duration",
+    "payment_method": "Payment Method",
+    "payment_method_desc": "Choose USDT or BNB for trading",
     "duration_1h": "1 Hour",
     "duration_4h": "4 Hours",
     "duration_24h": "1 Day",

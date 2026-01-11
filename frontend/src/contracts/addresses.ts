@@ -6,10 +6,11 @@ export const CONTRACTS = {
     FACTORY: '0x8fd3c246AA277435781bbcDF60Efc6Bd55f46c68',
     CHAINLINK_ADAPTER: '0x0cC60D6A782Ae5c312f4075C8E8e42E50E3d88AA',
 
-    // BNB-based price prediction market factory (deployed 2026-01-09)
-    PRICE_MARKET_FACTORY: '0x8820b123aC0174d65C7b29CFEeED7f671EA672A0',
+    // BNB-based price prediction market factory (AUTO PRICE RECORDING - deployed 2026-01-11)
+    PRICE_MARKET_FACTORY: '0xA78fc737a3aa2054BF925D403c989991c59f3F37',
 
-    // USDT-based price prediction market factory (NEW - deployed 2026-01-11)
+    // USDT-based price prediction market factory (OLD - no auto price)
+    // TODO: Redeploy with auto price recording after getting more BNB
     USDT_PRICE_MARKET_FACTORY: '0xBCCb4a4DEEF67B5776e26a28C23ce01F828295E6',
 
     // First test market (BTC 1-hour)

@@ -195,26 +195,27 @@ contract USDTPricePredictionMarket is Ownable, ReentrancyGuard, Pausable {
 
         state = MarketState.Active;
 
-        emit MarketCreated(_assetSymbol, _duration, startTime, endTime, _priceFeed, _usdtToken);
-    }
-
-    // ============ Core Trading Functions ============
-
-    /**
-     * @notice Record starting price from Chainlink (called once after creation)
-     */
-    function recordStartPrice() external {
-        require(!priceRecorded, "Price already recorded");
-        require(block.timestamp <= startTime + 5 minutes, "Too late to record price");
-
+        // Auto-record start price immediately
         (, int256 price, , uint256 updatedAt, ) = priceFeed.latestRoundData();
-        require(price > 0, "Invalid price");
+        require(price > 0, "Invalid price from feed");
         require(block.timestamp - updatedAt < 1 hours, "Price data stale");
 
         startPrice = price;
         priceRecorded = true;
 
+        emit MarketCreated(_assetSymbol, _duration, startTime, endTime, _priceFeed, _usdtToken);
         emit StartPriceRecorded(price, block.timestamp);
+    }
+
+    // ============ Core Trading Functions ============
+
+    /**
+     * @notice Record starting price from Chainlink
+     * @dev This function is now called automatically in constructor
+     * Kept for backwards compatibility but will always revert
+     */
+    function recordStartPrice() external pure {
+        revert("Price is now recorded automatically in constructor");
     }
 
     /**

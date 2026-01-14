@@ -324,6 +324,28 @@
     "claiming": "Claiming...",
     "error_claimed": "You have already claimed tokens",
     "error_failed": "Transaction failed. Please try again.",
-    "success": "Success! 30,000 tUSDT have been sent to your wallet."
+    "success": "Success! 30,000 tUSDT have been sent to your wallet.",
+    "alert_testnet": "Please switch to BSC Testnet"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "subtitle": "Top predictors ranked by performance",
+    "total_traders": "Total Traders",
+    "total_predictions": "Total Predictions",
+    "total_volume": "Total Volume",
+    "avg_win_rate": "Avg Win Rate",
+    "top_predictors": "Top Predictors",
+    "rank": "Rank",
+    "trader": "Trader",
+    "predictions": "Predictions",
+    "win_rate": "Win Rate",
+    "profit": "Profit (USDT)",
+    "you": "You",
+    "load_more": "Load More",
+    "your_ranking": "Your Ranking",
+    "your_rank": "Rank",
+    "your_predictions": "Predictions",
+    "your_win_rate": "Win Rate",
+    "your_profit": "Profit"
   }
 }

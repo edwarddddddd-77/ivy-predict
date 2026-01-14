@@ -324,6 +324,28 @@
     "claiming": "領取中...",
     "error_claimed": "您已經領取過代幣",
     "error_failed": "交易失敗。請重試。",
-    "success": "成功！30,000 tUSDT 已發送到您的錢包。"
+    "success": "成功！30,000 tUSDT 已發送到您的錢包。",
+    "alert_testnet": "請切換至 BSC 測試網"
+  },
+  "leaderboard": {
+    "title": "排行榜",
+    "subtitle": "按表現排名的頂級預測者",
+    "total_traders": "總交易者",
+    "total_predictions": "總預測數",
+    "total_volume": "總交易量",
+    "avg_win_rate": "平均勝率",
+    "top_predictors": "頂級預測者",
+    "rank": "排名",
+    "trader": "交易者",
+    "predictions": "預測數",
+    "win_rate": "勝率",
+    "profit": "盈利 (USDT)",
+    "you": "您",
+    "load_more": "載入更多",
+    "your_ranking": "您的排名",
+    "your_rank": "排名",
+    "your_predictions": "預測數",
+    "your_win_rate": "勝率",
+    "your_profit": "盈利"
   }
 }

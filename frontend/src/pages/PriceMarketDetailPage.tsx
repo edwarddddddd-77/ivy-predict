@@ -18,10 +18,15 @@ const ASSETS: Record<string, { icon: string; color: string; name: string }> = {
 };
 
 const DURATION_LABELS: Record<number, string> = {
-  0: '1 Hour',
-  1: '4 Hours',
-  2: '24 Hours',
+  0: '5 Minutes',
+  1: '15 Minutes', 
+  2: '1 Hour',
+  3: '4 Hours',
+  4: '24 Hours',
 };
+
+// Preset amount buttons for quick trading
+const PRESET_AMOUNTS = ['10', '50', '100', '500'];
 
 // Countdown timer component
 function CountdownTimer({ endTime }: { endTime: number }) {
@@ -373,6 +378,22 @@ export default function PriceMarketDetailPage() {
                     </div>
                   </div>
                 </div>
+                {/* Preset Amount Buttons */}
+                <div className="flex gap-2 mb-3">
+                  {PRESET_AMOUNTS.map((preset) => (
+                    <button
+                      key={preset}
+                      onClick={() => setAmount(preset)}
+                      className={`flex-1 py-2 px-3 rounded-lg font-medium text-sm transition-all ${
+                        amount === preset
+                          ? 'bg-[#00C9A7] text-white'
+                          : 'bg-[#0A2342]/60 text-[#8A9BA8] hover:bg-[#00C9A7]/20 hover:text-white border border-white/10'
+                      }`}
+                    >
+                      {preset} USDT
+                    </button>
+                  ))}
+                </div>
                 <div className="flex gap-3">
                   <input
                     type="number"
@@ -413,6 +434,22 @@ export default function PriceMarketDetailPage() {
                       {probDOWN.toFixed(1)}%
                     </div>
                   </div>
+                </div>
+                {/* Preset Amount Buttons */}
+                <div className="flex gap-2 mb-3">
+                  {PRESET_AMOUNTS.map((preset) => (
+                    <button
+                      key={preset}
+                      onClick={() => setAmount(preset)}
+                      className={`flex-1 py-2 px-3 rounded-lg font-medium text-sm transition-all ${
+                        amount === preset
+                          ? 'bg-[#00C9A7] text-white'
+                          : 'bg-[#0A2342]/60 text-[#8A9BA8] hover:bg-[#00C9A7]/20 hover:text-white border border-white/10'
+                      }`}
+                    >
+                      {preset} USDT
+                    </button>
+                  ))}
                 </div>
                 <div className="flex gap-3">
                   <input

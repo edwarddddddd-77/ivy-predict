@@ -27,7 +27,7 @@ export default function QuickMarketPage() {
   const publicClient = usePublicClient();
   const { chain, address: userAddress } = useAccount();
   const [selectedAsset, setSelectedAsset] = useState('BTC');
-  const [selectedDuration, setSelectedDuration] = useState('1h');
+  const [selectedDuration, setSelectedDuration] = useState('5m');
   const [paymentType, setPaymentType] = useState<'USDT' | 'BNB'>('USDT'); // Default to USDT
   const [createdMarketAddress, setCreatedMarketAddress] = useState<string | null>(null);
 

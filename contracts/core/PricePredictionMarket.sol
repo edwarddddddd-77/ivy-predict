@@ -36,6 +36,8 @@ contract PricePredictionMarket is Ownable, ReentrancyGuard, Pausable {
     }
 
     enum Duration {
+        FIVE_MINUTES,    // 5 minute market (Lightning)
+        FIFTEEN_MINUTES, // 15 minute market (Flash)
         ONE_HOUR,    // 1 hour market
         FOUR_HOURS,  // 4 hour market
         ONE_DAY      // 24 hour market
@@ -176,6 +178,11 @@ contract PricePredictionMarket is Ownable, ReentrancyGuard, Pausable {
         startTime = block.timestamp;
 
         // Set end time based on duration
+        if (_duration == Duration.FIVE_MINUTES) {
+            endTime = startTime + 5 minutes;
+        } else if (_duration == Duration.FIFTEEN_MINUTES) {
+            endTime = startTime + 15 minutes;
+        } else
         if (_duration == Duration.ONE_HOUR) {
             endTime = startTime + 1 hours;
         } else if (_duration == Duration.FOUR_HOURS) {

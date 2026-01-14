@@ -6,10 +6,13 @@ import PriceMarketDetailPage from './pages/PriceMarketDetailPage';
 import CreateMarketPage from './pages/CreateMarketPage';
 import QuickMarketPage from './pages/QuickMarketPage';
 import PortfolioPage from './pages/PortfolioPage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import { ReferralProvider } from './contexts/ReferralContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#051525] text-white">
+    <ReferralProvider>
+      <div className="min-h-screen bg-[#051525] text-white">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <Routes>
@@ -19,9 +22,11 @@ function App() {
           <Route path="/create" element={<CreateMarketPage />} />
           <Route path="/quick" element={<QuickMarketPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Routes>
       </main>
-    </div>
+      </div>
+    </ReferralProvider>
   );
 }
 

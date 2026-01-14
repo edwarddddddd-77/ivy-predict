@@ -1,4 +1,4 @@
-// Contract addresses - Last deployed: 2026-01-11
+// Contract addresses - Last deployed: 2026-01-15
 export const CONTRACTS = {
   // BSC Testnet
   97: {
@@ -19,6 +19,9 @@ export const CONTRACTS = {
     // Test USDT Faucet (TESTNET ONLY - deployed 2026-01-11)
     MOCK_USDT: '0x846314aA0461E7ae9F1B69F52A565ad8A335E72b',
     USDT_FAUCET: '0x2fb19570EC97b8Be0CfE390765ab1DaD4a3BeD99',
+
+    // PK Challenge Contract (deployed 2026-01-15)
+    PK_CHALLENGE: '0xC294dA88bD7b824d1259aCE9E3deD716637da82E',
   },
   // BSC Mainnet
   56: {
@@ -29,6 +32,7 @@ export const CONTRACTS = {
     TEST_MARKET_BTC_1H: '0x0000000000000000000000000000000000000000',
     MOCK_USDT: '0x55d398326f99059fF775485246999027B3197955', // Real USDT on BSC Mainnet
     USDT_FAUCET: '0x0000000000000000000000000000000000000000', // Not used on mainnet
+    PK_CHALLENGE: '0x0000000000000000000000000000000000000000',
   },
 };
 
@@ -51,7 +55,7 @@ export const PRICE_FEEDS = {
 
 export function getContractAddress(
   chainId: number,
-  contract: 'FACTORY' | 'CHAINLINK_ADAPTER' | 'PRICE_MARKET_FACTORY' | 'USDT_PRICE_MARKET_FACTORY' | 'TEST_MARKET_BTC_1H' | 'MOCK_USDT' | 'USDT_FAUCET'
+  contract: 'FACTORY' | 'CHAINLINK_ADAPTER' | 'PRICE_MARKET_FACTORY' | 'USDT_PRICE_MARKET_FACTORY' | 'TEST_MARKET_BTC_1H' | 'MOCK_USDT' | 'USDT_FAUCET' | 'PK_CHALLENGE'
 ) {
   const addresses = CONTRACTS[chainId as keyof typeof CONTRACTS];
   if (!addresses) {

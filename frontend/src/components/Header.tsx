@@ -41,6 +41,12 @@ export default function Header() {
               <span>⚡</span> {t('nav.quick_trade')}
             </Link>
             <Link
+              to="/pk"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300 flex items-center gap-2"
+            >
+              <span>⚔️</span> {t('nav.pk', 'PK Battle')}
+            </Link>
+            <Link
               to="/create"
               className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300"
             >

@@ -7,24 +7,29 @@ import CreateMarketPage from './pages/CreateMarketPage';
 import QuickMarketPage from './pages/QuickMarketPage';
 import PortfolioPage from './pages/PortfolioPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import PKChallengePage from './pages/PKChallengePage';
+import PKBattlePage from './pages/PKBattlePage';
 import { ReferralProvider } from './contexts/ReferralContext';
 
 function App() {
   return (
     <ReferralProvider>
       <div className="min-h-screen bg-[#051525] text-white">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/market/:address" element={<MarketDetailPage />} />
-          <Route path="/price-market/:address" element={<PriceMarketDetailPage />} />
-          <Route path="/create" element={<CreateMarketPage />} />
-          <Route path="/quick" element={<QuickMarketPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
+        <Header />
+        <main className="container mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/market/:address" element={<MarketDetailPage />} />
+            <Route path="/price-market/:address" element={<PriceMarketDetailPage />} />
+            <Route path="/create" element={<CreateMarketPage />} />
+            <Route path="/quick" element={<QuickMarketPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
-        </Routes>
-      </main>
+            {/* PK Challenge Routes */}
+            <Route path="/pk" element={<PKChallengePage />} />
+            <Route path="/pk/:id" element={<PKBattlePage />} />
+          </Routes>
+        </main>
       </div>
     </ReferralProvider>
   );

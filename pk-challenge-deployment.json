@@ -1,0 +1,13 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "pkChallenge": "0xC294dA88bD7b824d1259aCE9E3deD716637da82E",
+  "paymentToken": "0x846314aA0461E7ae9F1B69F52A565ad8A335E72b",
+  "treasury": "0x9f3c75dBD5941446b53C19d0Fd1039C7842A1a69",
+  "priceFeeds": {
+    "BTC/USD": "0x5741306c21795FdCBb9b265Ea0255F499DFe515C",
+    "ETH/USD": "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7",
+    "BNB/USD": "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526"
+  },
+  "deployedAt": "2026-01-14T19:43:12.008Z"
+}

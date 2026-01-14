@@ -26,8 +26,7 @@ export default function ShareCard({
   const [copied, setCopied] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
-  // Generate referral link
-  const referralLink = `${window.location.origin}?ref=${address || ''}`;
+  // Generate market link with referral
   const marketLink = `${window.location.origin}/price-market/${marketAddress}?ref=${address || ''}`;
 
   const handleCopy = async (text: string) => {

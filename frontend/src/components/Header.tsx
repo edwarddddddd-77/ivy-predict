@@ -44,7 +44,13 @@ export default function Header() {
               to="/pk"
               className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300 flex items-center gap-2"
             >
-              <span>⚔️</span> {t('nav.pk', 'PK Battle')}
+              <span>📈</span> {t('nav.price_pk', 'Price PK')}
+            </Link>
+            <Link
+              to="/event-pk"
+              className="text-[#8A9BA8] hover:text-[#00C9A7] font-medium text-base transition-all duration-300 flex items-center gap-2"
+            >
+              <span>🎯</span> {t('nav.event_pk', 'Event PK')}
             </Link>
             <Link
               to="/create"

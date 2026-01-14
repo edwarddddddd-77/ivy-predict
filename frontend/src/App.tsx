@@ -9,6 +9,8 @@ import PortfolioPage from './pages/PortfolioPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import PKChallengePage from './pages/PKChallengePage';
 import PKBattlePage from './pages/PKBattlePage';
+import EventPKChallengePage from './pages/EventPKChallengePage';
+import EventPKBattlePage from './pages/EventPKBattlePage';
 import { ReferralProvider } from './contexts/ReferralContext';
 
 function App() {
@@ -25,9 +27,12 @@ function App() {
             <Route path="/quick" element={<QuickMarketPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
-            {/* PK Challenge Routes */}
+            {/* Price PK Challenge Routes */}
             <Route path="/pk" element={<PKChallengePage />} />
             <Route path="/pk/:id" element={<PKBattlePage />} />
+            {/* Event PK Challenge Routes */}
+            <Route path="/event-pk" element={<EventPKChallengePage />} />
+            <Route path="/event-pk/:id" element={<EventPKBattlePage />} />
           </Routes>
         </main>
       </div>

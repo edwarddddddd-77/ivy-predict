@@ -1,0 +1,9 @@
+{
+  "network": "bscTestnet",
+  "chainId": 97,
+  "eventPKChallenge": "0xD9F9B4Ddac50fF219f9121F02e83f9e6Ffce0369",
+  "paymentToken": "0x846314aA0461E7ae9F1B69F52A565ad8A335E72b",
+  "treasury": "0x9f3c75dBD5941446b53C19d0Fd1039C7842A1a69",
+  "oracleResolver": "0x9f3c75dBD5941446b53C19d0Fd1039C7842A1a69",
+  "deployedAt": "2026-01-14T20:50:07.642Z"
+}

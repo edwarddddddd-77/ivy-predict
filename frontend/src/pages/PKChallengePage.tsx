@@ -8,6 +8,7 @@ import PKChallengeABI from '../contracts/abis/PKChallenge.json';
 import MockUSDTABI from '../contracts/abis/MockUSDT.json';
 import { useReferral } from '../contexts/ReferralContext';
 import { Duration, DURATION_LABELS } from '../hooks/usePKChallenge';
+import OpenPKChallengeList from '../components/OpenPKChallengeList';
 
 // Asset configuration
 const ASSETS = [
@@ -169,18 +170,37 @@ export default function PKChallengePage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="font-display text-4xl font-bold text-white mb-4">
-          ⚔️ {t('pk.create_title', 'Create PK Challenge')}
+        <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+          ⚔️ {t('pk.title', 'PK Battle')}
         </h1>
-        <p className="text-[#8A9BA8] text-lg">
+        <p className="text-[#8A9BA8] text-base md:text-lg">
           {t('pk.create_subtitle', 'Challenge your friends to a 1v1 price prediction battle')}
         </p>
       </div>
 
-      <div className="glass-card rounded-2xl p-8 space-y-8">
+      {/* Open Challenges Section */}
+      <div className="mb-12">
+        <OpenPKChallengeList />
+      </div>
+
+      {/* Divider */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="flex-1 h-px bg-white/10"></div>
+        <span className="text-[#8A9BA8] text-sm">{t('openChallenge.or_create', 'Or create your own')}</span>
+        <div className="flex-1 h-px bg-white/10"></div>
+      </div>
+
+      {/* Create Challenge Section */}
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
+          ✨ {t('pk.create_title', 'Create PK Challenge')}
+        </h2>
+      </div>
+
+      <div className="glass-card rounded-2xl p-6 md:p-8 space-y-8 max-w-4xl mx-auto">
         {/* Step 1: Select Asset */}
         <section>
           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">

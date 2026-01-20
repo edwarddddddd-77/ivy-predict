@@ -8,6 +8,7 @@ import EventPKChallengeABI from '../contracts/abis/EventPKChallenge.json';
 import MockUSDTABI from '../contracts/abis/MockUSDT.json';
 import { useReferral } from '../contexts/ReferralContext';
 import { Position, CATEGORIES } from '../hooks/useEventPKChallenge';
+import OpenEventChallengeList from '../components/OpenEventChallengeList';
 
 const PRESET_AMOUNTS = ['10', '50', '100', '500'];
 
@@ -161,18 +162,37 @@ export default function EventPKChallengePage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-8">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
       {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="font-display text-4xl font-bold text-white mb-3">
-          {t('eventPk.create_title', 'Create Event PK')}
+      <div className="text-center mb-10">
+        <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+          🎯 {t('nav.event_pk', 'Event PK')}
         </h1>
         <p className="text-[#8A9BA8] text-lg">
           {t('eventPk.create_subtitle', 'Challenge friends to bet on any event outcome')}
         </p>
       </div>
 
-      <div className="glass-card rounded-2xl p-8 space-y-6">
+      {/* Open Challenges Section */}
+      <div className="mb-12">
+        <OpenEventChallengeList />
+      </div>
+
+      {/* Divider */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="flex-1 h-px bg-white/10"></div>
+        <span className="text-[#8A9BA8] text-sm">{t('openChallenge.or_create', 'Or create your own')}</span>
+        <div className="flex-1 h-px bg-white/10"></div>
+      </div>
+
+      {/* Create Challenge Section */}
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
+          ✨ {t('eventPk.create_title', 'Create Event PK')}
+        </h2>
+      </div>
+
+      <div className="glass-card rounded-2xl p-6 md:p-8 space-y-6 max-w-2xl mx-auto">
         {/* Question Input */}
         <div>
           <label className="block text-sm font-medium text-white/90 mb-2">

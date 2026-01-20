@@ -327,6 +327,16 @@
     "success": "Success! 30,000 tUSDT have been sent to your wallet.",
     "alert_testnet": "Please switch to BSC Testnet"
   },
+  "openChallenge": {
+    "title": "Open Challenges",
+    "event_title": "Open Event Challenges",
+    "no_challenges": "No Open Challenges",
+    "no_challenges_desc": "Be the first to create a public challenge!",
+    "no_event_challenges": "No Open Event Challenges",
+    "no_event_challenges_desc": "Be the first to create a public event challenge!",
+    "you_bet": "You will bet",
+    "or_create": "Or create your own"
+  },
   "leaderboard": {
     "title": "Leaderboard",
     "subtitle": "Top predictors ranked by performance",

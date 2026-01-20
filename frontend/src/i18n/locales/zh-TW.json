@@ -327,6 +327,16 @@
     "success": "成功！30,000 tUSDT 已發送到您的錢包。",
     "alert_testnet": "請切換至 BSC 測試網"
   },
+  "openChallenge": {
+    "title": "公開挑戰",
+    "event_title": "公開事件挑戰",
+    "no_challenges": "暫無公開挑戰",
+    "no_challenges_desc": "成為第一個創建公開挑戰的人！",
+    "no_event_challenges": "暫無公開事件挑戰",
+    "no_event_challenges_desc": "成為第一個創建公開事件挑戰的人！",
+    "you_bet": "您將押注",
+    "or_create": "或者創建您自己的挑戰"
+  },
   "leaderboard": {
     "title": "排行榜",
     "subtitle": "按表現排名的頂級預測者",

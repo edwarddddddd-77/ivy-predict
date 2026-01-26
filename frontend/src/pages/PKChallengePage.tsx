@@ -9,6 +9,7 @@ import MockUSDTABI from '../contracts/abis/MockUSDT.json';
 import { useReferral } from '../contexts/ReferralContext';
 import { Duration, DURATION_LABELS } from '../hooks/usePKChallenge';
 import OpenPKChallengeList from '../components/OpenPKChallengeList';
+import SmartMatchCard from '../components/SmartMatchCard';
 
 // Asset configuration
 const ASSETS = [
@@ -363,6 +364,13 @@ export default function PKChallengePage() {
             ))}
           </div>
         </section>
+
+        {/* Smart Match - Show matching opponents */}
+        <SmartMatchCard
+          selectedAsset={selectedAsset}
+          selectedDirection={direction}
+          amount={myAmount}
+        />
 
         {/* Step 5: Options */}
         <section>

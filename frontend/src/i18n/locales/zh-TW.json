@@ -337,6 +337,17 @@
     "you_bet": "您將押注",
     "or_create": "或者創建您自己的挑戰"
   },
+  "smartMatch": {
+    "title": "智能匹配成功！",
+    "available": "個可用",
+    "description": "找到準備對戰的對手。立即接受開始戰鬥！",
+    "opponent_bets": "對手押注",
+    "you_bet": "您押注",
+    "their_stake": "對方下注",
+    "your_stake": "您的下注",
+    "instant_battle": "立即對戰",
+    "approve_first": "接受前需先授權 USDT"
+  },
   "leaderboard": {
     "title": "排行榜",
     "subtitle": "按表現排名的頂級預測者",

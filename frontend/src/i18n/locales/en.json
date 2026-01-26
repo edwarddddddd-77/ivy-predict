@@ -337,6 +337,17 @@
     "you_bet": "You will bet",
     "or_create": "Or create your own"
   },
+  "smartMatch": {
+    "title": "Smart Match Found!",
+    "available": "available",
+    "description": "We found opponents ready to battle. Accept for instant action!",
+    "opponent_bets": "Opponent bets",
+    "you_bet": "You bet",
+    "their_stake": "Their stake",
+    "your_stake": "Your stake",
+    "instant_battle": "Instant Battle",
+    "approve_first": "USDT approval required before accepting"
+  },
   "leaderboard": {
     "title": "Leaderboard",
     "subtitle": "Top predictors ranked by performance",
